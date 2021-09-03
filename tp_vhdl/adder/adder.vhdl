@@ -13,7 +13,7 @@ begin
 	     (not i1 and i2 and not ci) or
 	     (i1 and not i2 and not ci) or
 	     (i1 and i2 and ci);
-	co <= (i2 and ci and not ci) or 
+	co <= (i2 and ci and not i1) or 
 	      (i1 and ci and not i2) or
 	      (i1 and i2 and not ci) or
 	      (i1 and i2 and ci);
