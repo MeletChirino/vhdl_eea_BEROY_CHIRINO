@@ -34,6 +34,14 @@
 # Compiled VDHL files
 **.cf
 
+# PDF and images files
+**.pdf
+**.jpeg
+**.png
+
+# Waveform files
+**.ghw
+
 # Recovery files from vim
 **.swp
 exemples_ghdl/.adder.vhdl.swp (link)
