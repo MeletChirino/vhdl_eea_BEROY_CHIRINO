@@ -8,7 +8,7 @@ entity adder_2x5 is
 		num1, num2	: in std_logic_vector(4 downto 0);
 		s		: out std_logic_vector(4 downto 0);
 		cin		: in std_logic;
-		cout		: out std_logic;
+		cout		: out std_logic
 	);
 end entity;
 
