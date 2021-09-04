@@ -22,7 +22,7 @@ begin
 	      );
 
 	process begin
-		for i in 9 downto 0 loop
+		for i in 11 downto 0 loop
 			wait for 1 ns;
 			input <= input + "0001";
 		end loop;
