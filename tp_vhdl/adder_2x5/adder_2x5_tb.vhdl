@@ -31,9 +31,9 @@ begin
 	process begin
 		
 		for i in num1'left downto num1'right loop
-			num1(i) <= '1';
-			num2(i) <= '1';
-			wait for 1 ns;
+			num1 <= num1 + "00001";
+			num2 <= num2 + "00010";
+			wait for 0.5 ns;
 		end loop;
 		--assert false report "end";
 		wait;
