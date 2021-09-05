@@ -16,15 +16,13 @@ begin
 	sum : process (input) is
 
 begin
-
         if input = '1' then
-
-            number <= number + "0001";
-
+		number <= number + "0001";
+		if number > x"8" then
+			number <= x"0";
+		end if;
         end if;
-
 	output <= number;
 
 end process sum;
-
 end rtl;
