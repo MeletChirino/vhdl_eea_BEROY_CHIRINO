@@ -22,10 +22,10 @@ begin
 		);
 
 	process begin
-		for i in 0 to 5 loop
-			wait for 1 ns;
+		for i in 0 to  20 loop
+			wait for 0.5 ns;
 			input <= '1';
-			wait for 1 ns;
+			wait for 0.5 ns;
 			input <= '0';
 		end loop;
 		wait;
