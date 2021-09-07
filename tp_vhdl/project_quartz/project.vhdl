@@ -10,10 +10,14 @@ entity project is
 	port(
 		clk_in	: in std_logic;
 		output	: out std_logic_vector(6 downto 0)
+		--aqui hay que meterle otras entradas como el 
+		--C
+		--Reset
 	);
 end entity;
 
 architecture rtl of project is
+	--falta el frequency divider
 	component counter
 		port(
 			input	: in std_logic;
