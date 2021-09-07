@@ -22,4 +22,7 @@ begin
 		"1111111" when x"8",
 		"1110011" when x"9",
 		"0000000" when others;
+	for i in 6 downto 0 loop
+		output(i) <= not output(i);
+	end loop
 end rtl;
