@@ -15,32 +15,28 @@ end entity;
 architecture rtl of counter is
 	signal number	: std_logic_vector(3 downto 0) := "0000";
 begin
-	sum : process (input) is
+	sum : process (input, c, reset) is
 
 begin
 	if reset = '1' then 
 		--if there RESET is pressed
 		number <= x"0";
 	else
-		--if RESET is not pressed
-		if c = '1' then
-		       --if C is pressed
-		       number <= number + x"1";
-
-			if number > x"8" then
-				--for reinitializing counter when it is growing
-				number <= x"0";
+		if (input'event and input = '1') then
+			if c = '1' then
+				number <= number + x"1";
+				if number > x"8" then
+					number <= x"0";
+				end if;
+			elsif c = '0';
+				number <= number - x"1";
+				if number = x"0" then
+					number <= x"9";
+				end if;
 			end if;
-	       else
-		       --if C is pressed
-		       number <= number - x"1";
+		end if;
 
-			if number = x"0" then
-				--for reinitializing counter when it is not growing 
-				number <= x"9";
-			end if;
-	       end if;
-       end if;	       
+	end if;
 	output <= number;
 
 end process sum;
