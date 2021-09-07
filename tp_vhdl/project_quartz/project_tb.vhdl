@@ -23,10 +23,10 @@ begin
 	);
 
 	process begin
-		for i in 0 to 10 loop
-			wait for 1 ns;
+		for i in 0 to 50000000 loop
+			wait for 20 ns;
 			clk <= '1';
-			wait for 1 ns;
+			wait for 20 ns;
 			clk <= '0';
 		end loop;
 	end process;

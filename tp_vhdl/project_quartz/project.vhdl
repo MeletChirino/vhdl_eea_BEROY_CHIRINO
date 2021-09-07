@@ -34,7 +34,7 @@ architecture rtl of project is
 	end component;	       
 	signal first_input	: std_logic;
 	signal counter_result	: std_logic_vector(3 downto 0);
-	signal c		: std_logic := '0';
+	signal c		: std_logic := '1';
 	signal reset		: std_logic := '0';
 begin
 	increment	: counter port map(
