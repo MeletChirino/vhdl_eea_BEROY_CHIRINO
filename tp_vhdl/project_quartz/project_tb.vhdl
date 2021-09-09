@@ -16,14 +16,14 @@ architecture test of project_tb is
 	signal clk	: std_logic := '0';
 	signal bcd_output	: std_logic_vector(6 downto 0);
 begin
-	map1 : project port map(
+	simulation : project port map(
 		--puerto externo => senhal local
 		clk_in => clk,
 		output => bcd_output
 	);
 
 	process begin
-		for i in 0 to 50000000 loop
+		for i in 0 to 1500000000 loop
 			wait for 20 ns;
 			clk <= '1';
 			wait for 20 ns;

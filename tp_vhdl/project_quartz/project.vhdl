@@ -17,7 +17,12 @@ entity project is
 end entity;
 
 architecture rtl of project is
-	--falta el frequency divider
+	component diviseur
+		port(
+			clk	: in std_logic;
+			clock_out	: out std_logic
+		);
+	end component;
 	component counter
 		port(
 			input	: in std_logic;
@@ -32,14 +37,19 @@ architecture rtl of project is
 			output_7seg	: out std_logic_vector(6 downto 0)
 		   );
 	end component;	       
-	signal first_input	: std_logic;
+
+	signal time_divided	: std_logic;
 	signal counter_result	: std_logic_vector(3 downto 0);
 	signal c		: std_logic := '1';
 	signal reset		: std_logic := '0';
 begin
-	increment	: counter port map(
+	time_divider	: diviseur port map (
+			clk		=> clk_in,
+			clock_out	=> time_divided
+			);
+	acumulateur	: counter port map(
 			--senhal externa => senhal interna
-			input	=> clk_in,
+			input	=> time_divided,
 			c	=> c,
 			reset	=> reset,
 			output	=> counter_result
