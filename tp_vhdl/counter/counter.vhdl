@@ -13,9 +13,16 @@ end entity;
 architecture rtl of counter is
 	signal number	: std_logic_vector(3 downto 0) := "0000";
 begin
-	number <= number + "0001" when input = '1';
-	--output <= number(3 downto 0);
-	output(1) <= input;
+	sum : process (input) is
 
+begin
+        if input = '1' then
+		number <= number + "0001";
+		if number > x"8" then
+			number <= x"0";
+		end if;
+        end if;
+	output <= number;
 
+end process sum;
 end rtl;
