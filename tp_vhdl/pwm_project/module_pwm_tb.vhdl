@@ -15,8 +15,8 @@ architecture test of module_pwm_tb is
 			pwm_out		: out std_logic
 		);
 	end component;
-	signal freq		: std_logic_vector(7 downto 0) := x"ff";
-	signal duty_cycle	: std_logic_vector(7 downto 0) := x"88";
+	signal freq		: std_logic_vector(7 downto 0) := x"1f";
+	signal duty_cycle	: std_logic_vector(7 downto 0) := x"14";
 	signal clk_in		: std_logic := '0';
 begin
 	simulation : module_pwm port map(
