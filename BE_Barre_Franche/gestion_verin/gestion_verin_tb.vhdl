@@ -12,23 +12,20 @@ end entity;
 
 architecture test of gestion_verin_tb is
 	signal clk	: std_logic := '0';
-	signal freq	: std_logic_vector(15 downto 0) := x"07d0";
-	signal duty	: std_logic_vector(15 downto 0) := x"0053";
-	signal pwm_out	: std_logic;
+	signal clk_adc	: std_logic := '0';
 begin
-	pwm_mod		: pwm_module port map(
+	clk_adc_p	: clk_1MHz  port map(
+		--internal signal => external signal
 		clk_in		=> clk,
-		freq		=> freq,
-		duty		=> duty,
-		pwm		=> pwm_out
+		clk_out		=> clk_adc
 	);
 	process begin
-		wait for 10 ns;
-		for i in 0 to 4000 loop
-			wait for 10 ns;
-			clk <= '1';
+		clk <= '1';
+		for i in 0 to 400 loop
 			wait for 10 ns;
 			clk <= '0';
+			wait for 10 ns;
+			clk <= '1';
 		end loop;
 	end process;
 end test;
