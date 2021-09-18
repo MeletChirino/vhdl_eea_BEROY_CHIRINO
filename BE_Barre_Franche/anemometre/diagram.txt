@@ -1,0 +1,17 @@
+@startuml
+package "Anemometre" {
+	[Select Mode] as select
+	[Counter] as counter
+	[To 8 bits] as converter
+	[clk_1MHz] as clk
+}
+clk_50MHz --> clk
+raz_n --> clk
+clk --> counter
+data_in --> counter
+continu --> select
+start_stop --> select
+select --> counter
+counter --> converter
+converter --> data_out : wind_speed[7:0]
+@enduml
