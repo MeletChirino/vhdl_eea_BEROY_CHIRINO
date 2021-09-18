@@ -19,4 +19,16 @@ package tools is
 			clk_out	: out std_logic
 		    );
 	end component;
+	component shift_register is
+		port(
+			data_in		: in std_logic;
+			angle_barre	: out std_logic_vector(11 downto 0);
+			clk_in		: in std_logic := '0'
+		);
+	end component;
+	component clk_50MHz is
+		port(
+			output	: out std_logic := 0
+	    );
+	end component;
 end tools;
