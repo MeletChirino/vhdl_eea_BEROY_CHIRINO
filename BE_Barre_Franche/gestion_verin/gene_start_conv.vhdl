@@ -19,13 +19,13 @@ begin
 	begin
 		if(clk_in'event and clk_in = '1') then
 			number <= number + x"0001";
-			if(number = x"c350") then
-			--if(number = x"000d") then
+			--if(number = x"c350") then
+			if(number = x"000d") then
 				number <= x"0000";
-				output <= '1';
+				output <= '0';
 			end if;
 		else
-			output <= '0';
+			output <= '1';
 		end if;
 	end process;
 	cs_n <= output;
