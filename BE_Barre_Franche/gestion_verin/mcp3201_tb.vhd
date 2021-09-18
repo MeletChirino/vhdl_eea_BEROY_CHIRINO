@@ -15,12 +15,15 @@ architecture test of mcp3201_tb is
 	signal clk_50		: std_logic := '0';
 	signal clk_adc		: std_logic;
 	signal enable		: std_logic := '0';
-	signal cs_n		: std_logic;
+	signal cs_n		: std_logic := '1';
 	signal number		: std_logic_vector(3 downto 0);
 	signal angle_barre	: std_logic_vector(11 downto 0);
 	--internal signals
-	signal data_in		: std_logic;
-	signal data		: std_logic_vector(11 downto 0) := x"abc";
+	signal data_in		: std_logic := '1';
+	signal data		: std_logic_vector(11 downto 0) := x"9b9";
+	signal j		: integer := 11;
+	signal clk_conv		: std_logic := '0';
+	signal counter		: integer := 0;
 begin
 	clk_1			: clk_1MHz port map(
 				clk_in		=> clk_50,
@@ -36,9 +39,17 @@ begin
 				cs_n		=> cs_n
 				);
 	state_machine		: pilote_adc port map(
+				clk_in		=> clk_adc,
 				cs_n		=> cs_n,
 				counter		=> number,
 				enable		=> enable
+				);
+	shift_register_p	: shift_register port map(
+				enable		=> enable,
+				number		=> number,
+				data_in		=> data_in,
+				angle_barre	=> angle_barre,
+				clk_in		=> clk_adc
 				);
 
 	clk_50MHz		: process is
@@ -51,20 +62,16 @@ begin
 		end loop;
 	end process clk_50MHz;
 
-	--clk_50MHz --> clk_1MHz
-	--clk_1Mhz --> re_counter
-	--clk_1MHz --> cs_m
-	--clk_1MHz --> shiftreg : clk_adc
-	--recounter --> shiftreg
-	--re_counter --> state machine : counter
-	--state machine --> re counter : enable
-	--state machine --> shiftreg : enable
-	--csn --> state machine : csn
-	
-	--********* local data ***********
-	--csn --> here
-	-- here --> shift reg
-	-- clk_adc --> here
-
+	send_data		: process(clk_adc, enable) is
+	begin
+		if(clk_adc'event and clk_adc='0' and enable = '1') then
+			clk_conv <= not(clk_conv);
+			data_in <= data(j);
+			j <= j - 1;
+		end if;
+			if(j = 0) then
+				j <= 10;
+			end if;
+	end process send_data;
 
 end test;
