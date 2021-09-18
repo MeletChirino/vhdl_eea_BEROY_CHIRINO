@@ -24,7 +24,10 @@ begin
 					number <= x"0";
 				end if;
 			end if;
+		else
+			number <= x"0";
 		end if;
 	end process compt_front_p;
+	counter <= number;
 			
 end rtl;

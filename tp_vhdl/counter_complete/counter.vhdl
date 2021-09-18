@@ -28,7 +28,7 @@ begin
 				if number > x"8" then
 					number <= x"0";
 				end if;
-			elsif c = '0';
+			elsif c = '0' then
 				number <= number - x"1";
 				if number = x"0" then
 					number <= x"9";

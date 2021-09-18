@@ -19,7 +19,7 @@ begin
 		if (clk_in'event and clk_in = '1') then
 			number <= number + 1;
 		end if;
-		if (number = 50) then
+		if (number = 25) then
 			output_signal <= not output_signal;
 			number <= 0;
 		end if;
