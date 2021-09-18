@@ -15,13 +15,13 @@ architecture test of mcp3201_tb is
 	signal clk_50		: std_logic := '0';
 	signal clk_adc		: std_logic;
 	signal enable		: std_logic := '0';
-	signal cs_n		: std_logic := '1';
+	signal cs_n		: std_logic;
 	signal number		: std_logic_vector(3 downto 0);
 	signal angle_barre	: std_logic_vector(11 downto 0);
 	--internal signals
 	signal data_in		: std_logic := '1';
 	signal data		: std_logic_vector(11 downto 0) := x"9b9";
-	signal j		: integer := 11;
+	signal j		: integer := 0;
 	signal clk_conv		: std_logic := '0';
 	signal counter		: integer := 0;
 begin
@@ -67,10 +67,10 @@ begin
 		if(clk_adc'event and clk_adc='0' and enable = '1') then
 			clk_conv <= not(clk_conv);
 			data_in <= data(j);
-			j <= j - 1;
+			j <= j + 1;
 		end if;
-			if(j = 0) then
-				j <= 10;
+			if(j = 11) then
+				j <= 0;
 			end if;
 	end process send_data;
 
