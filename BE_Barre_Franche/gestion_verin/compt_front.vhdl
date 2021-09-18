@@ -17,7 +17,7 @@ architecture rtl of compt_front is
 begin
 	compt_front_p	: process(clk_in) is
 	begin
-		if( enable = '1') then
+		if(enable = '1') then
 			if (clk_in'event and clk_in =  '1') then
 				number <= number + x"1";
 				if (number = x"c") then
