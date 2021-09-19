@@ -49,4 +49,16 @@ package tools is
 			cs_n		: out std_logic
 		    );
 	end component;
+	component gestion_adc is
+		port(
+		-- INPUTS
+		clk_in		: in std_logic;
+		data_in		: in std_logic;
+		--Raz ?
+		-- OUTPUTS
+		cs_n		: out std_logic;
+		clk_adc		: out std_logic;
+		angle_barre	: out std_logic_vector(11 downto 0)	
+		);
+	end component;
 end tools;
