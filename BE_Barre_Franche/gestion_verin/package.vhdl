@@ -61,4 +61,19 @@ package tools is
 		angle_barre	: out std_logic_vector(11 downto 0)	
 		);
 	end component;
+	component gestion_butees is
+		port(
+		--inputs
+		pwm		: in std_logic;
+		butee_g		: in std_logic_vector(11 downto 0);
+		butee_d		: in std_logic_vector(11 downto 0);
+		angle_barre	: in std_logic_vector(11 downto 0);
+		sens		: in std_logic;
+		--outputs
+		out_pwm		: out std_logic;
+		fin_course_g	: out std_logic;
+		fin_course_d	: out std_logic;
+		out_sens	: out std_logic
+		);
+	end component;
 end tools;

@@ -14,29 +14,37 @@ entity gestion_butees is
 		sens		: in std_logic;
 		--outputs
 		out_pwm		: out std_logic;
+		fin_course_g	: out std_logic;
+		fin_course_d	: out std_logic;
 		out_sens	: out std_logic
 	);
 end entity;
 
 architecture rtl of gestion_butees is
 	signal pwm_s		: std_logic;
-	signal sens_s		: std_logic;
 begin
-	check_left		: process(angle_barre) is
+	check			: process(angle_barre) is
 	begin
-		--si va a la izquierda pero el angle barre
-		--es igual o menor que el de butee que ponga
-		--el pwm a 0
-	end process check_left;
+		if(sens = '0') then
+			if (angle_barre < butee_g) then
+				pwm_s <= '0';
+				fin_course_g <= '1';
+			else
+				pwm_s <= pwm;
+				fin_course_g <= '0';
+				end if;
+		elsif(sens = '1') then
+			if (angle_barre > butee_d) then
+				pwm_s <= '0';
+				fin_course_d <= '1';
+			else
+				pwm_s <= pwm;
+				fin_course_d <= '0';
+				end if;
+			end if;	
+	end process check;
 
-	check_right		: process(angle_barre) is
-	begin
-		--si va a la derecha pero el angle barre
-		--es igual o menor que el de butee que ponga
-		--el pwm a 0
-	end process check_right;
-
-	pwm_out <= pwm_s;
-	sens_out <= sens_s;
+	out_pwm <= pwm_s;
+	out_sens <= sens;
 
 end rtl;
