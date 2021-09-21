@@ -1,4 +1,4 @@
--- Rising edge counter for shift register
+--Shift register to store data. The MSB is bit 0
 library	ieee;
 use	ieee.std_logic_1164.all;
 use	ieee.std_logic_unsigned.all;
