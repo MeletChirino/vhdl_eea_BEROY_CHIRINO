@@ -18,9 +18,6 @@ architecture test of gestion_verin_tb is
 	signal final_data	: std_logic_vector(11 downto 0);
 	signal i	: integer := 0;
 begin
-	clk_50		: clk_50MHz port map(
-		output		=> clk_50M
-				    );
 	clk_adc_p	: clk_1MHz  port map(
 		--internal signal => external signal
 		clk_in		=> clk_50M,

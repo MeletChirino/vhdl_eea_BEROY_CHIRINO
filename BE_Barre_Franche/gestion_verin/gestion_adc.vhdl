@@ -1,4 +1,4 @@
--- mcp3201 simulator
+-- mcp3201 handler
 library	ieee;
 use	ieee.std_logic_1164.all;
 use	ieee.std_logic_unsigned.all;
@@ -59,4 +59,4 @@ begin
 	angle_barre <= angle_barre_s;
 
 
-end test;
+end rtl;
