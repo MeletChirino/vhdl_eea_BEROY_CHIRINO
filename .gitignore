@@ -63,3 +63,13 @@ exemples_ghdl/.adder.vhdl.swp (link)
 **/incremental_db/**
 **.pub
 # new commit
+#
+# Quartus files
+**.bdf
+**.qsys
+**.sopcinfo
+**/.qsys_edit/**
+**/software/**
+BE_Barre_Franche/gestion_verin/first_try/
+BE_Barre_Franche/gestion_verin_workspace/
+BE_Barre_Franche/gestion_verin/output_files/
