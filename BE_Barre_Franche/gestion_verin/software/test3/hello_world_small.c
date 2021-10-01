@@ -87,12 +87,22 @@ int main()
   printf("Hello from Melet!\n");
   int count = 0;
   int delay;
-  unsigned char button_state = 0x00;
+  unsigned char dip_state = 0x0;
+  unsigned char button0_state = 0x0;
+  unsigned char led_state = 0x0;
+
 
   while(1){
-	  IOWR_ALTERA_AVALON_PIO_DATA(PIO_1_BASE, count & 0x01);
+	  led_state = count & 0x1;
 	  printf("Reading Button\n");
-	  button_state = IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE);
+	  dip_state = (IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE)) & 0x1;
+	  button0_state = (IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE)) & 0x8;
+	  led_state = led_state | (button0_state >> 1);
+	  led_state = led_state | (dip_state << 1);
+	  printf("button_state = %x\n", dip_state);
+	  printf("led_state = %x\n", led_state);
+	  IOWR_ALTERA_AVALON_PIO_DATA(PIO_1_BASE, led_state);
+	  //IOWR_ALTERA_AVALON_PIO_DATA(PIO_1_BASE, button_state & 0x03);
 	  delay = 0;
 
 	  while(delay < 2000000){

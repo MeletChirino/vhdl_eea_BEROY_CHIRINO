@@ -14,7 +14,7 @@
 
 # Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 # File: C:\Users\cruz_\Documents\projects\vhdl_eea_BEROY_CHIRINO\BE_Barre_Franche\gestion_verin\pins.csv
-# Generated on: Thu Sep 30 21:54:42 2021
+# Generated on: Fri Oct 01 08:00:21 2021
 
 # Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
 
@@ -23,12 +23,12 @@ altera_reserved_tck,Input,,,,PIN_H3,,,,,,
 altera_reserved_tdi,Input,,,,PIN_H4,,,,,,
 altera_reserved_tdo,Output,,,,PIN_J4,,,,,,
 altera_reserved_tms,Input,,,,PIN_J5,,,,,,
-clk_clk,Input,PIN_R8,3,B3_N0,PIN_E1,,,,,,
-pio_0_external_connection_export[3],Input,PIN_J15,5,B5_N0,PIN_E7,,,,,,
-pio_0_external_connection_export[2],Input,PIN_E1,1,B1_N0,PIN_C6,,,,,,
-pio_0_external_connection_export[1],Input,PIN_M1,2,B2_N0,PIN_C9,,,,,,
-pio_0_external_connection_export[0],Input,PIN_T8,3,B3_N0,PIN_C8,,,,,,
-pio_1_external_connection_export[3],Output,PIN_A15,7,B7_N0,PIN_E9,,,,,,
-pio_1_external_connection_export[2],Output,PIN_A13,7,B7_N0,PIN_F8,,,,,,
-pio_1_external_connection_export[1],Output,PIN_B13,7,B7_N0,PIN_D8,,,,,,
-pio_1_external_connection_export[0],Output,PIN_A11,7,B7_N0,PIN_E8,,,,,,
+clk_clk,Input,PIN_R8,3,B3_N0,PIN_R8,2.5 V,,,,,
+pio_0_external_connection_export[3],Input,PIN_M1,2,B2_N0,PIN_J15,2.5 V,,,,,
+pio_0_external_connection_export[2],Input,PIN_T8,3,B3_N0,PIN_E1,2.5 V,,,,,
+pio_0_external_connection_export[1],Input,PIN_B9,7,B7_N0,PIN_M1,2.5 V,,,,,
+pio_0_external_connection_export[0],Input,PIN_M15,5,B5_N0,PIN_T8,2.5 V,,,,,
+pio_1_external_connection_export[3],Output,PIN_A15,7,B7_N0,PIN_A15,2.5 V,,,,,
+pio_1_external_connection_export[2],Output,PIN_A13,7,B7_N0,PIN_A13,2.5 V,,,,,
+pio_1_external_connection_export[1],Output,PIN_B13,7,B7_N0,PIN_B13,2.5 V,,,,,
+pio_1_external_connection_export[0],Output,PIN_A11,7,B7_N0,PIN_A11,2.5 V,,,,,
