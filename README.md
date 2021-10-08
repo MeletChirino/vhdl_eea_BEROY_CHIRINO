@@ -5,9 +5,6 @@ By:
 
 In this file you're going to find vhdl files and TP vhdl files with simulations and graphics
 
-<<<<<<< HEAD
-THIS IS A TEST
-=======
 ## GHDL
 All VHDL circuits written in this repo has been simulated using [GHDL](http://ghdl.free.fr/) which is an open source simulator for vhdl available for Linux, Windows and Apple OS X. That's why in every folder with file you're going to find a file `_tb.vhdl` and a `Makefile`. If you're not using GHDL to simulate your files you can ignore those files.
 
@@ -29,4 +26,3 @@ This PWM module is going to receive the frequency and duty cycle coded by softwa
 This device is going to receive data from MCP3201 as serial input and store it as numeric 12-bit number
 
 ![adc-diagram](https://i.ibb.co/9nJ81WJ/adc-module.png)
->>>>>>> 1c799118b5861cb0bd55054a7a344f4302e61764
