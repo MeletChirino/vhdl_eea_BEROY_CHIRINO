@@ -1,0 +1,8 @@
+	component mon_pwm is
+		port (
+			anemo_0_conduit_end_beginbursttransfer : in  std_logic := 'X'; -- beginbursttransfer
+			clk_clk                                : in  std_logic := 'X'; -- clk
+			pwm_0_conduit_end_writeresponsevalid_n : out std_logic         -- writeresponsevalid_n
+		);
+	end component mon_pwm;
+

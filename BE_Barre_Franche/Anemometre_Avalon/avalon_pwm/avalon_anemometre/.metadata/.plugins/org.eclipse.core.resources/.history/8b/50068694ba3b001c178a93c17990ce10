@@ -1,0 +1,14 @@
+#include "stdio.h"
+#include "system.h"
+
+#define continu (unsigned int *) ANEMO_0_BASE
+#define data (unsigned int *) (ANEMO_0_BASE + 4)
+
+int main()
+{ 
+  printf("Hello from Nios II!\n");
+  *continu = 0x2;
+  //*data = 0x0400;
+
+  return 0;
+}

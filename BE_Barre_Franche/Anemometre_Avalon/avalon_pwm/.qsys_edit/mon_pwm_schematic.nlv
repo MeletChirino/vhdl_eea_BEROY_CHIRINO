@@ -1,0 +1,20 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst mon_pwm.nios2_gen2_0.reset_bridge -pg 1
+preplace inst mon_pwm.onchip_memory2_0 -pg 1 -lvl 2 -y 130
+preplace inst mon_pwm.nios2_gen2_0.clock_bridge -pg 1
+preplace inst mon_pwm.sysid_qsys_0 -pg 1 -lvl 2 -y 210
+preplace inst mon_pwm -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst mon_pwm.clk_0 -pg 1 -lvl 2 -y 430
+preplace inst mon_pwm.jtag_uart_0 -pg 1 -lvl 2 -y 30
+preplace inst mon_pwm.pwm_0 -pg 1 -lvl 2 -y 290
+preplace inst mon_pwm.nios2_gen2_0.cpu -pg 1
+preplace inst mon_pwm.nios2_gen2_0 -pg 1 -lvl 1 -y 70
+preplace netloc INTERCONNECT<net_container>mon_pwm</net_container>(MASTER)nios2_gen2_0.instruction_master,(SLAVE)sysid_qsys_0.control_slave,(MASTER)nios2_gen2_0.data_master,(SLAVE)jtag_uart_0.avalon_jtag_slave,(SLAVE)onchip_memory2_0.s1,(SLAVE)nios2_gen2_0.debug_mem_slave,(SLAVE)pwm_0.avalon_slave_0) 1 0 2 150 210 570
+preplace netloc INTERCONNECT<net_container>mon_pwm</net_container>(SLAVE)nios2_gen2_0.reset,(MASTER)nios2_gen2_0.debug_reset_request,(SLAVE)pwm_0.reset,(SLAVE)jtag_uart_0.reset,(SLAVE)onchip_memory2_0.reset1,(SLAVE)clk_0.clk_in_reset,(MASTER)clk_0.clk_reset,(SLAVE)sysid_qsys_0.reset) 1 0 3 170 230 590 420 810
+preplace netloc POINT_TO_POINT<net_container>mon_pwm</net_container>(MASTER)nios2_gen2_0.irq,(SLAVE)jtag_uart_0.irq) 1 1 1 550
+preplace netloc FAN_OUT<net_container>mon_pwm</net_container>(MASTER)clk_0.clk,(SLAVE)sysid_qsys_0.clk,(SLAVE)pwm_0.clock,(SLAVE)jtag_uart_0.clk,(SLAVE)onchip_memory2_0.clk1,(SLAVE)nios2_gen2_0.clk) 1 0 3 150 30 530 400 830
+preplace netloc EXPORT<net_container>mon_pwm</net_container>(SLAVE)mon_pwm.pwm_0_conduit_end,(SLAVE)pwm_0.conduit_end) 1 0 2 NJ 340 NJ
+preplace netloc EXPORT<net_container>mon_pwm</net_container>(SLAVE)clk_0.clk_in,(SLAVE)mon_pwm.clk) 1 0 2 NJ 440 NJ
+levelinfo -pg 1 0 120 870
+levelinfo -hier mon_pwm 130 290 640 850
