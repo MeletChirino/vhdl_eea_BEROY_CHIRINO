@@ -17,6 +17,9 @@ end entity;
 architecture rtl of pwm_module is
 	--signals
 	signal counter		: std_logic_vector(15 downto 0) := x"0000";
+	signal duty_s		: std_logic_vector(15 downto 0);
+	signal freq_s		: std_logic_vector(15 downto 0);
+	signal pwm_s		: std_logic;
 begin
 	divide : process(clk_in) is
 	begin
@@ -31,10 +34,11 @@ begin
 	compare	: process(clk_in) is
 	begin
 		if (counter < duty) then 
-			pwm <= '1';
+			pwm_s <= '1';
 		else
-			pwm <= '0';
+			pwm_s <= '0';
 		end if;
 	end process compare;
+pwm <= pwm_s;
 
 end rtl;

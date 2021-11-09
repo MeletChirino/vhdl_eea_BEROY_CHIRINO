@@ -57,9 +57,9 @@ begin
 				enable <= '0';
 			when s1=>
 			--save data state
-				enable <= '0';
+				enable <= '1';
 			when s2=>
-			--save data state
+			--show data state
 				enable <= '1';
 		end case;
 	end process;

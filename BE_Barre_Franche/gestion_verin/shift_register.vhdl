@@ -16,19 +16,20 @@ end entity;
 
 architecture rtl of shift_register is
 	signal buff_data	: std_logic_vector(0 to 11);
-	signal number_i		: integer;
+	signal angle_barre_s	: std_logic_vector(0 to 11);
+	signal number_i		: integer range 0 to 13;
 begin
 	--rec_dec process
 	number_i <= to_integer(unsigned(number));
-	rec_dec	: process(clk_in) is
+	rec_dec	: process(clk_in, data_in, number) is
 	begin
 		if (enable = '1') then
-			if not(number = x"c") then
+			if (number < x"c") then
 				buff_data(number_i) <= data_in;
 			end if;
 		else
-			angle_barre <= buff_data;
+			angle_barre_s <= buff_data;
 		end if;
-
 	end process rec_dec;
+	angle_barre <= angle_barre_s;
 end rtl;

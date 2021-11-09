@@ -4,7 +4,19 @@ use 	ieee.std_logic_unsigned.all;
 use 	ieee.numeric_std.all;
 
 package tools is
-
+	component sopc_v3 is
+		port(
+		angle_barre_external_connection_export : in  std_logic_vector(11 downto 0) := (others => '0'); -- angle_barre_external_connection.export
+		butee_d_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_d_external_connection.export
+		butee_g_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_g_external_connection.export
+		clk_clk                                : in  std_logic                     := '0';             --                             clk.clk
+		duty_external_connection_export        : out std_logic_vector(15 downto 0);                    --        duty_external_connection.export
+		frequency_external_connection_export   : out std_logic_vector(15 downto 0);                    --   frequency_external_connection.export
+		read_data_external_connection_export   : out std_logic_vector(31 downto 0);                    --   read_data_external_connection.export
+		sens_external_connection_export        : out std_logic;                                        --        sens_external_connection.export
+		write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => '0')  --  write_data_external_connection.export
+			);
+	end component;
 	component pwm_module is
 		port(
 			freq	: in std_logic_vector(15 downto 0);
