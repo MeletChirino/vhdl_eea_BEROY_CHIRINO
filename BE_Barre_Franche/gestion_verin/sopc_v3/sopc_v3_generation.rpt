@@ -1,0 +1,129 @@
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\Users\cruz_\Documents\projects\vhdl_eea_BEROY_CHIRINO\BE_Barre_Franche\gestion_verin\sopc_v3.qsys --synthesis=VHDL --output-directory=C:\Users\cruz_\Documents\projects\vhdl_eea_BEROY_CHIRINO\BE_Barre_Franche\gestion_verin\sopc_v3\synthesis --family="Cyclone IV E" --part=EP4CE22F17C6
+Progress: Loading gestion_verin/sopc_v3.qsys
+Progress: Reading input file
+Progress: Adding angle_barre [altera_avalon_pio 18.0]
+Progress: Parameterizing module angle_barre
+Progress: Adding butee_d [altera_avalon_pio 18.0]
+Progress: Parameterizing module butee_d
+Progress: Adding butee_g [altera_avalon_pio 18.0]
+Progress: Parameterizing module butee_g
+Progress: Adding clk_0 [clock_source 18.0]
+Progress: Parameterizing module clk_0
+Progress: Adding duty [altera_avalon_pio 18.0]
+Progress: Parameterizing module duty
+Progress: Adding frequency [altera_avalon_pio 18.0]
+Progress: Parameterizing module frequency
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 18.0]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding nios2_gen2_0 [altera_nios2_gen2 18.0]
+Progress: Parameterizing module nios2_gen2_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 18.0]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding onchip_memory2_1 [altera_avalon_onchip_memory2 18.0]
+Progress: Parameterizing module onchip_memory2_1
+Progress: Adding read_data [altera_avalon_pio 18.0]
+Progress: Parameterizing module read_data
+Progress: Adding sens [altera_avalon_pio 18.0]
+Progress: Parameterizing module sens
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 18.0]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding write_data [altera_avalon_pio 18.0]
+Progress: Parameterizing module write_data
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: sopc_v3.angle_barre: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: sopc_v3.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: sopc_v3.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: sopc_v3.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: sopc_v3.write_data: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: sopc_v3: Generating sopc_v3 "sopc_v3" for QUARTUS_SYNTH
+Info: angle_barre: Starting RTL generation for module 'sopc_v3_angle_barre'
+Info: angle_barre:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_angle_barre --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0070_angle_barre_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0070_angle_barre_gen//sopc_v3_angle_barre_component_configuration.pl  --do_build_sim=0  ]
+Info: angle_barre: Done RTL generation for module 'sopc_v3_angle_barre'
+Info: angle_barre: "sopc_v3" instantiated altera_avalon_pio "angle_barre"
+Info: butee_d: Starting RTL generation for module 'sopc_v3_butee_d'
+Info: butee_d:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_butee_d --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0071_butee_d_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0071_butee_d_gen//sopc_v3_butee_d_component_configuration.pl  --do_build_sim=0  ]
+Info: butee_d: Done RTL generation for module 'sopc_v3_butee_d'
+Info: butee_d: "sopc_v3" instantiated altera_avalon_pio "butee_d"
+Info: duty: Starting RTL generation for module 'sopc_v3_duty'
+Info: duty:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_duty --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0072_duty_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0072_duty_gen//sopc_v3_duty_component_configuration.pl  --do_build_sim=0  ]
+Info: duty: Done RTL generation for module 'sopc_v3_duty'
+Info: duty: "sopc_v3" instantiated altera_avalon_pio "duty"
+Info: jtag_uart_0: Starting RTL generation for module 'sopc_v3_jtag_uart_0'
+Info: jtag_uart_0:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=sopc_v3_jtag_uart_0 --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0073_jtag_uart_0_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0073_jtag_uart_0_gen//sopc_v3_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0: Done RTL generation for module 'sopc_v3_jtag_uart_0'
+Info: jtag_uart_0: "sopc_v3" instantiated altera_avalon_jtag_uart "jtag_uart_0"
+Info: nios2_gen2_0: "sopc_v3" instantiated altera_nios2_gen2 "nios2_gen2_0"
+Info: onchip_memory2_0: Starting RTL generation for module 'sopc_v3_onchip_memory2_0'
+Info: onchip_memory2_0:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=sopc_v3_onchip_memory2_0 --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0074_onchip_memory2_0_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0074_onchip_memory2_0_gen//sopc_v3_onchip_memory2_0_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_0: Done RTL generation for module 'sopc_v3_onchip_memory2_0'
+Info: onchip_memory2_0: "sopc_v3" instantiated altera_avalon_onchip_memory2 "onchip_memory2_0"
+Info: onchip_memory2_1: Starting RTL generation for module 'sopc_v3_onchip_memory2_1'
+Info: onchip_memory2_1:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2 -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_onchip_memory2/generate_rtl.pl --name=sopc_v3_onchip_memory2_1 --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0075_onchip_memory2_1_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0075_onchip_memory2_1_gen//sopc_v3_onchip_memory2_1_component_configuration.pl  --do_build_sim=0  ]
+Info: onchip_memory2_1: Done RTL generation for module 'sopc_v3_onchip_memory2_1'
+Info: onchip_memory2_1: "sopc_v3" instantiated altera_avalon_onchip_memory2 "onchip_memory2_1"
+Info: read_data: Starting RTL generation for module 'sopc_v3_read_data'
+Info: read_data:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_read_data --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0076_read_data_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0076_read_data_gen//sopc_v3_read_data_component_configuration.pl  --do_build_sim=0  ]
+Info: read_data: Done RTL generation for module 'sopc_v3_read_data'
+Info: read_data: "sopc_v3" instantiated altera_avalon_pio "read_data"
+Info: sens: Starting RTL generation for module 'sopc_v3_sens'
+Info: sens:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_sens --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0077_sens_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0077_sens_gen//sopc_v3_sens_component_configuration.pl  --do_build_sim=0  ]
+Info: sens: Done RTL generation for module 'sopc_v3_sens'
+Info: sens: "sopc_v3" instantiated altera_avalon_pio "sens"
+Info: sysid_qsys_0: "sopc_v3" instantiated altera_avalon_sysid_qsys "sysid_qsys_0"
+Info: write_data: Starting RTL generation for module 'sopc_v3_write_data'
+Info: write_data:   Generation command is [exec C:/intelfpga_lite/18.0/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.0/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.0/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=sopc_v3_write_data --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0079_write_data_gen/ --quartus_dir=C:/intelfpga_lite/18.0/quartus --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0079_write_data_gen//sopc_v3_write_data_component_configuration.pl  --do_build_sim=0  ]
+Info: write_data: Done RTL generation for module 'sopc_v3_write_data'
+Info: write_data: "sopc_v3" instantiated altera_avalon_pio "write_data"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_002: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_003: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_004: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_005: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_006: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_007: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_008: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_009: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_010: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_011: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_012: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "sopc_v3" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: irq_mapper: "sopc_v3" instantiated altera_irq_mapper "irq_mapper"
+Info: rst_controller: "sopc_v3" instantiated altera_reset_controller "rst_controller"
+Info: cpu: Starting RTL generation for module 'sopc_v3_nios2_gen2_0_cpu'
+Info: cpu:   Generation command is [exec C:/intelFPGA_lite/18.0/quartus/bin64//eperlcmd.exe -I C:/intelFPGA_lite/18.0/quartus/bin64//perl/lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.0/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/cpu_lib -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/nios_lib -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -I C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2 -- C:/intelfpga_lite/18.0/quartus/../ip/altera/nios2_ip/altera_nios2_gen2/generate_rtl.epl --name=sopc_v3_nios2_gen2_0_cpu --dir=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0082_cpu_gen/ --quartus_bindir=C:/intelFPGA_lite/18.0/quartus/bin64/ --verilog --config=C:/Users/cruz_/AppData/Local/Temp/alt8922_6531801178771820547.dir/0082_cpu_gen//sopc_v3_nios2_gen2_0_cpu_processor_configuration.pl  --do_build_sim=0  ]
+Info: cpu: # 2021.10.22 09:18:25 (*) Starting Nios II generation
+Info: cpu: # 2021.10.22 09:18:25 (*)   Checking for plaintext license.
+Info: cpu: # 2021.10.22 09:18:26 (*)   Couldn't query license setup in Quartus directory C:/intelFPGA_lite/18.0/quartus/bin64/
+Info: cpu: # 2021.10.22 09:18:26 (*)   Defaulting to contents of LM_LICENSE_FILE environment variable
+Info: cpu: # 2021.10.22 09:18:26 (*)   LM_LICENSE_FILE environment variable is empty
+Info: cpu: # 2021.10.22 09:18:26 (*)   Plaintext license not found.
+Info: cpu: # 2021.10.22 09:18:26 (*)   No license required to generate encrypted Nios II/e.
+Info: cpu: # 2021.10.22 09:18:26 (*)   Elaborating CPU configuration settings
+Info: cpu: # 2021.10.22 09:18:26 (*)   Creating all objects for CPU
+Info: cpu: # 2021.10.22 09:18:27 (*)   Generating RTL from CPU objects
+Info: cpu: # 2021.10.22 09:18:27 (*)   Creating plain-text RTL
+Info: cpu: # 2021.10.22 09:18:28 (*) Done Nios II generation
+Info: cpu: Done RTL generation for module 'sopc_v3_nios2_gen2_0_cpu'
+Info: cpu: "nios2_gen2_0" instantiated altera_nios2_gen2_unit "cpu"
+Info: nios2_gen2_0_data_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "nios2_gen2_0_data_master_translator"
+Info: jtag_uart_0_avalon_jtag_slave_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "jtag_uart_0_avalon_jtag_slave_translator"
+Info: nios2_gen2_0_data_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "nios2_gen2_0_data_master_agent"
+Info: jtag_uart_0_avalon_jtag_slave_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "jtag_uart_0_avalon_jtag_slave_agent"
+Info: jtag_uart_0_avalon_jtag_slave_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "jtag_uart_0_avalon_jtag_slave_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/Users/cruz_/Documents/projects/vhdl_eea_BEROY_CHIRINO/BE_Barre_Franche/gestion_verin/sopc_v3/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: sopc_v3: Done "sopc_v3" with 29 modules, 43 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
