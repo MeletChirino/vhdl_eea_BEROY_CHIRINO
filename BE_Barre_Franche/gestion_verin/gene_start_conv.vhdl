@@ -22,7 +22,7 @@ begin
 		if(clk_in'event and clk_in =  '1') then
 			number <= number + x"0001";
 		end if;
-		if (number > x"c350") then
+		if (number > x"c349") then
 			output <= not output;
 			number <= x"0000";
 		end if;

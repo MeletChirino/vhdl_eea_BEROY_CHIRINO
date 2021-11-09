@@ -32,16 +32,16 @@ begin
 					end if;
 			when s1=>
 				--wait for convertion state
-				--wait for 4 rising edges for sampling time
+				--wait for 3 rising edges for sampling time
 				if (clk_in = '1') then
-					if(sampling = x"3") then
+					if(sampling > x"3") then
 						state <= s2;
 						end if;
 					sampling <= sampling + x"1";
 				end if;
 			when s2=>
 			--save data state
-				if (counter = x"c") then
+				if (counter > x"b") then
 					state <= s0;
 				end if;
 		end case;

@@ -20,12 +20,12 @@ begin
 		if(enable = '1') then
 			if (clk_in'event and clk_in =  '1') then
 				number <= number + x"1";
-				if (number = x"c") then
+				if (number > x"b") then
 					number <= x"0";
 				end if;
 			end if;
 		else
-			number <= x"0";
+		number <= x"0";
 		end if;
 	end process compt_front_p;
 	counter <= number;

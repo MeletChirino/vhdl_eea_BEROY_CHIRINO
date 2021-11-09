@@ -23,12 +23,14 @@ begin
 	number_i <= to_integer(unsigned(number));
 	rec_dec	: process(clk_in, data_in, number) is
 	begin
+		if (clk_in'event and clk_in = '0') then
 		if (enable = '1') then
-			if (number < x"c") then
+			if (number < x"b") then
 				buff_data(number_i) <= data_in;
 			end if;
 		else
 			angle_barre_s <= buff_data;
+		end if;
 		end if;
 	end process rec_dec;
 	angle_barre <= angle_barre_s;
