@@ -11,16 +11,16 @@ entity clk_1MHz is
 end entity;
 
 architecture rtl of clk_1MHz is
-	signal number		: std_logic_vector(5 downto 0) := "000000";
 	signal output_signal	: std_logic := '1';
 begin
 	gene_1M	: process(clk_in) is
+		variable counter : integer range 0 to 50;
 	begin
 		if (clk_in'event and clk_in = '1') then
-			number <= number + "000001";
-			if (number > "011001") then
+			counter := counter + 1;
+			if (counter > 24) then
 				output_signal <= not output_signal;
-				number <= "000000";
+				counter := 0;
 			end if;
 		end if;
 
