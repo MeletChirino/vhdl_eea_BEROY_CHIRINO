@@ -27,32 +27,24 @@ architecture rtl of gestion_adc is
 	signal cs_n_s		: std_logic;
 	signal number		: std_logic_vector(3 downto 0);
 	signal angle_barre_s	: std_logic_vector(11 downto 0);
+	signal fin_c_s		: std_logic;
 begin
 	clk_1			: clk_1MHz port map(
 				clk_in		=> clk_in,
 				clk_out		=> clk_adc_s
 				);
-	rising_edge_c		: compt_front port map(
-				clk_in		=> clk_adc_s,
-				enable		=> enable,
-				counter		=> number
-				);
-	start_conversion	: gene_start_conv port map(
-				clk_in		=> clk_adc_s,
-				cs_n		=> cs_n_s
-				);
 	state_machine		: pilote_adc port map(
 				clk_in		=> clk_adc_s,
-				cs_n		=> cs_n_s,
-				counter		=> number,
-				enable		=> enable
+				cs_n 			=> cs_n_s,
+				enable		=> enable,
+				fin_c			=> fin_c_s
 				);
 	shift_register_p	: shift_register port map(
-				enable		=> enable,
-				number		=> number,
-				data_in		=> data_in,
-				angle_barre	=> angle_barre_s,
-				clk_in		=> clk_adc_s
+				enable => enable,
+				data_in => data_in,
+				angle_barre => angle_barre_s,
+				fin_c => fin_c_s,
+				clk_in => clk_adc_s
 				);
 	cs_n <= cs_n_s;
 	clk_adc <= clk_adc_s;
