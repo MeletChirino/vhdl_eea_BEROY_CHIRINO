@@ -1,0 +1,104 @@
+17:40:06 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+Info: Compiling hello_world_small.c to obj/default/hello_world_small.o
+nios2-elf-gcc -xc -MP -MMD -c -I../test_compteur_bsp//HAL/inc -I../test_compteur_bsp/ -I../test_compteur_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
+hello_world_small.c: In function 'main':
+hello_world_small.c:93:53: error: macro "IORD_ALTERA_AVALON_PIO_DATA" passed 2 arguments, but takes just 1
+    in = IORD_ALTERA_AVALON_PIO_DATA(BOUTTONS_BASE, 2);
+                                                     ^
+hello_world_small.c:93:9: error: 'IORD_ALTERA_AVALON_PIO_DATA' undeclared (first use in this function)
+    in = IORD_ALTERA_AVALON_PIO_DATA(BOUTTONS_BASE, 2);
+         ^
+hello_world_small.c:93:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [obj/default/hello_world_small.o] Error 1
+17:40:35 **** Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+Info: Compiling hello_world_small.c to obj/default/hello_world_small.o
+nios2-elf-gcc -xc -MP -MMD -c -I../test_compteur_bsp//HAL/inc -I../test_compteur_bsp/ -I../test_compteur_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
+hello_world_small.c: In function 'main':
+hello_world_small.c:93:53: error: macro "IORD_ALTERA_AVALON_PIO_DATA" passed 2 arguments, but takes just 1
+    in = IORD_ALTERA_AVALON_PIO_DATA(BOUTTONS_BASE, 2);
+                                                     ^
+hello_world_small.c:93:9: error: 'IORD_ALTERA_AVALON_PIO_DATA' undeclared (first use in this function)
+    in = IORD_ALTERA_AVALON_PIO_DATA(BOUTTONS_BASE, 2);
+         ^
+hello_world_small.c:93:9: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [obj/default/hello_world_small.o] Error 1
+17:40:39 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+Info: Compiling hello_world_small.c to obj/default/hello_world_small.o
+nios2-elf-gcc -xc -MP -MMD -c -I../test_compteur_bsp//HAL/inc -I../test_compteur_bsp/ -I../test_compteur_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
+Info: Linking test_compteur.elf
+nios2-elf-g++  -T'../test_compteur_bsp//linker.x' -msys-crt0='../test_compteur_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../test_compteur_bsp/  -msmallc  -Wl,-Map=test_compteur.map   -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o test_compteur.elf obj/default/hello_world_small.o -lm -msys-lib=m
+nios2-elf-insert test_compteur.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x11050 --timestamp 1633683645 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name mon_sopc --quartus_project_dir "C:/Users/JUANB/OneDrive/Documents/QUARTUS_UPS/sopc_compteur" --jdi ../..//output_files/sopc_compteur.jdi --sopcinfo C:/Users/JUANB/OneDrive/Documents/QUARTUS_UPS/sopc_compteur/software/test_compteur_bsp/../../mon_sopc.sopcinfo
+Info: (test_compteur.elf) 1336 Bytes program size (code + initialized data).
+Info:                     17 KBytes free for stack + heap.
+Info: Creating test_compteur.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source test_compteur.elf >test_compteur.objdump
+[test_compteur build complete]
+17:41:23 **** Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+17:41:26 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+Info: Compiling hello_world_small.c to obj/default/hello_world_small.o
+nios2-elf-gcc -xc -MP -MMD -c -I../test_compteur_bsp//HAL/inc -I../test_compteur_bsp/ -I../test_compteur_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_CLEAN_EXIT -D'exit(a)=_exit(a)' -DALT_NO_EXIT -DALT_USE_DIRECT_DRIVERS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/hello_world_small.o hello_world_small.c
+Info: Linking test_compteur.elf
+nios2-elf-g++  -T'../test_compteur_bsp//linker.x' -msys-crt0='../test_compteur_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../test_compteur_bsp/  -msmallc  -Wl,-Map=test_compteur.map   -Os -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o test_compteur.elf obj/default/hello_world_small.o -lm -msys-lib=m
+nios2-elf-insert test_compteur.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x11050 --timestamp 1633683645 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name mon_sopc --quartus_project_dir "C:/Users/JUANB/OneDrive/Documents/QUARTUS_UPS/sopc_compteur" --jdi ../..//output_files/sopc_compteur.jdi --sopcinfo C:/Users/JUANB/OneDrive/Documents/QUARTUS_UPS/sopc_compteur/software/test_compteur_bsp/../../mon_sopc.sopcinfo
+Info: (test_compteur.elf) 1336 Bytes program size (code + initialized data).
+Info:                     17 KBytes free for stack + heap.
+Info: Creating test_compteur.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source test_compteur.elf >test_compteur.objdump
+[test_compteur build complete]
+17:52:59 **** Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+17:53:04 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+17:54:48 **** Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+17:54:51 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+08:13:10 **** Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]
+08:13:16 **** Incremental Build of configuration Nios II for project test_compteur ****
+make all 
+Info: Building ../test_compteur_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../test_compteur_bsp/
+[BSP build complete]
+[test_compteur build complete]

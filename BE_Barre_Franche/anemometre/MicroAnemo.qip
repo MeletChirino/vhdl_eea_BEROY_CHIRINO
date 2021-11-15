@@ -1,0 +1,13 @@
+# clk_0
+# cpu_0
+set_global_assignment -name SDC_FILE [file join $::quartus(qip_path) cpu_0.sdc]
+set_global_assignment -name SOURCE_FILE [file join $::quartus(qip_path) cpu_0.ocp]
+# null
+# onchip_memory2_0
+# sysid_0
+# jtag_uart_0
+# freq_out
+set_global_assignment -name SOPC_BUILDER_SIGNATURE_ID "CA58C081CC930000017C3ADDD7D2"
+set_global_assignment -entity "MicroAnemo" -name IP_TOOL_NAME "sopc"
+set_global_assignment -entity "MicroAnemo" -name IP_TOOL_VERSION "11.1sp2"
+set_global_assignment -entity "MicroAnemo" -name IP_TOOL_ENV "sopc"
