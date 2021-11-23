@@ -15,7 +15,7 @@ end entity;
 
 architecture rtl of pilote_adc is
 	type state_type is (s0, s1, s2);
-	signal state	: state_type;
+	signal state	: state_type := s0;
 	signal cs_n_s		: std_logic;
 begin
 	cs_n <= cs_n_s;
@@ -24,12 +24,10 @@ begin
 	begin
 		if (clk_in'event and clk_in = '1') then
 			count := count + 1;
-			end if;
-		if (count >= 50000) then
-			cs_n_s <= '0';
-			count := 0;
-		else
-			cs_n_s <= '1';
+			if (count >= 49999) then
+				cs_n_s <= not cs_n_s;
+				count := 0;
+				end if;
 			end if;
 	end process gene_conv;
 
@@ -39,14 +37,14 @@ begin
 	begin
 		case state is
 			when s0=>
+			enable <= '0';
 			--do nothing state
 				if (cs_n_s = '0') then
 					state <= s1;
 					sampling := 0;
-				else
-					state <= s0;
 					end if;
 			when s1=>
+				enable <= '0';
 				--wait for convertion state
 				--wait for 3 rising edges for sampling time
 				if (clk_in = '1') then
@@ -57,6 +55,7 @@ begin
 				end if;
 			when s2=>
 			--save data state
+				enable <= '1';
 				if (fin_c = '1') then
 					state <= s0;
 				end if;
@@ -64,19 +63,4 @@ begin
 	end process;
 	
 
-	process(state)
-	--here you manage the outputs of state machine
-	begin
-		case state is
-			when s0=>
-			--do nothing state
-				enable <= '0';
-			when s1=>
-			--save data state
-				enable <= '0';
-			when s2=>
-			--show data state
-				enable <= '1';
-		end case;
-	end process;
 end rtl;

@@ -68,7 +68,7 @@ package tools is
 		data_in		: in std_logic;
 		--Raz ?
 		-- OUTPUTS
-		cs_n		: out std_logic;
+		cs_n			: out std_logic;
 		clk_adc		: out std_logic;
 		angle_barre	: out std_logic_vector(11 downto 0)	
 		);

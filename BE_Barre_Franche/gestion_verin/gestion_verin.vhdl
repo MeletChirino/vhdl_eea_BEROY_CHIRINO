@@ -35,8 +35,8 @@ architecture rtl of gestion_verin is
 	signal clk_adc_s	: std_logic;
 	signal angle_barre_w	: std_logic_vector(11 downto 0);
 	signal angle_barre_s	: std_logic_vector(11 downto 0);
-	signal butee_d		: std_logic_vector(11 downto 0) := x"000";
-	signal butee_g		: std_logic_vector(11 downto 0) := x"000";
+	signal butee_d		: std_logic_vector(11 downto 0);
+	signal butee_g		: std_logic_vector(11 downto 0);
 	signal freq_s		: std_logic_vector(15 downto 0);
 	signal duty_s		: std_logic_vector(15 downto 0);
 	signal sens_s		: std_logic;
@@ -60,22 +60,23 @@ begin
 		pwm		=> pwm_raw_s
 		);
 	adc_man	: gestion_adc port map(
-		--inputs
-		clk_in		=> clk_50m,
-		data_in		=> data_in,
-		--outputs
-		cs_n 		=> cs_n,
-		clk_adc		=> clk_adc_s,
-		angle_barre	=> angle_barre_s
+		-- INPUTS
+		clk_in	=> clk_50m,
+		data_in	=>	data_in,
+		--Raz ?
+		-- OUTPUTS
+		cs_n		=> cs_n,
+		clk_adc	=> clk_adc_s,
+		angle_barre => angle_barre_s
 		);
 	butees	: gestion_butees port map(
 		pwm			=> pwm_raw_s,
 		butee_g		=> butee_g,
 		butee_d		=> butee_d,
 		angle_barre	=> angle_barre_s,
-		sens		=> sens_s,
+		sens			=> sens_s,
 		out_pwm		=> out_pwm,
-		out_sens	=> out_sens
+		out_sens		=> out_sens
 		);
 				
 	--clk_50 <= clk_50m;

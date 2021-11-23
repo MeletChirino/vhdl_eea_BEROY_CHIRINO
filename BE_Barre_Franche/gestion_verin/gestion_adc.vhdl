@@ -22,33 +22,35 @@ entity gestion_adc is
 end entity;
 
 architecture rtl of gestion_adc is
-	signal clk_adc_s	: std_logic;
-	signal enable		: std_logic;
-	signal cs_n_s		: std_logic;
-	signal number		: std_logic_vector(3 downto 0);
-	signal angle_barre_s	: std_logic_vector(11 downto 0);
-	signal fin_c_s		: std_logic;
+	--test signals 
+	signal clk 	: std_logic := '0';
+	signal clk_adc_s	: std_logic := '0';
+	signal data	: std_logic_vector(11 downto 0);
+	signal cs_n_s	: std_logic;
+	signal fin_c	: std_logic;
+	signal angle	: std_logic_vector(11 downto 0);
+	signal enable	: std_logic;
 begin
-	clk_1			: clk_1MHz port map(
-				clk_in		=> clk_in,
-				clk_out		=> clk_adc_s
-				);
-	state_machine		: pilote_adc port map(
-				clk_in		=> clk_adc_s,
-				cs_n 			=> cs_n_s,
-				enable		=> enable,
-				fin_c			=> fin_c_s
-				);
-	shift_register_p	: shift_register port map(
-				enable => enable,
-				data_in => data_in,
-				angle_barre => angle_barre_s,
-				fin_c => fin_c_s,
-				clk_in => clk_adc_s
-				);
+	u_clk_adc	: clk_1MHz port map (
+			clk_in	=> clk_in,
+			clk_out	=> clk_adc_s
+			);
+	reg_dec		: shift_register port map (
+			enable 		=> enable,
+			data_in		=> data_in,
+			angle_barre 	=> data,
+			fin_c		=> fin_c,
+			clk_in		=> clk_adc_s
+			);
+	machine_etat	: pilote_adc port map(
+			clk_in		=> clk_adc_s,
+			cs_n		=> cs_n_s,
+			enable		=> enable,
+			fin_c		=> fin_c
+			);
 	cs_n <= cs_n_s;
 	clk_adc <= clk_adc_s;
-	angle_barre <= angle_barre_s;
+	angle_barre <= data;
 
 
 end rtl;
