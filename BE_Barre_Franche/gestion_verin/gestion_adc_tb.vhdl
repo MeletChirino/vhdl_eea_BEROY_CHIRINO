@@ -16,7 +16,7 @@ architecture test of gestion_adc_tb is
 	--test signals 
 	signal clk 	: std_logic := '0';
 	signal clk_adc_s	: std_logic := '0';
-	signal data	: std_logic_vector(11 downto 0) := x"445";
+	signal data	: std_logic_vector(14 downto 0);
 	signal data_in	: std_logic := '0';
 	signal cs_n	: std_logic;
 	signal fin_c	: std_logic;
@@ -40,20 +40,21 @@ begin
 			cs_n		=> cs_n,
 			fin_c		=> fin_c
 			);
+	data <= "000" & x"ae3";
 	clk <= not clk after 20 ns;
 
 	SEND_DATA	: process(clk_adc_s, enable)
 	begin
 		if (clk_adc_s'event and clk_adc_s = '1') then
-		if(enable = '1') then
-			if (num = 12) then 
-				num <= 1;
-			else
-				data_in <= data(num - 1);
-				num <= num + 1;
+			if(cs_n = '0') then
+				if (num = 12) then 
+					num <= 1;
+				else
+					data_in <= data(num - 1);
+					num <= num + 1;
+					end if;
 				end if;
 			end if;
-		end if;
 	end process SEND_DATA;
 
 end test;
