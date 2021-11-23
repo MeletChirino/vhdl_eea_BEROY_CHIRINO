@@ -22,7 +22,7 @@ begin
 	--rec_dec process
 	rec_dec	: process(clk_in) is
 	begin
-		if (clk_in'event and clk_in = '0') then
+		if (clk_in'event and clk_in = '1') then
 			if (number < 3) then
 				fin_c <= '0';
 			elsif (number > 2 and number < 15) then
@@ -38,14 +38,15 @@ begin
 	end process rec_dec;
 
 	COMPT_FRONT : process(clk_in, cs_n) is
-		--el contador se reinicia con cs_n y luego queda en un numero como 15 o algo asi
 	begin
 		if (clk_in'event and clk_in = '0') then
 			if (number < 16) then
 				number <= number + 1;
 				end if;
-		elsif (cs_n = '0') then
-			number <= 0;
+			if (cs_n = '1') then
+				--reset condition
+				number <= 0;
+				end if;
 			end if;
 	end process COMPT_FRONT;
 
