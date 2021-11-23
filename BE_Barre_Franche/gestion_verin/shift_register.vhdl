@@ -6,10 +6,10 @@ use	ieee.numeric_std.all;
 
 entity shift_register is
 	port(
-		enable		: in std_logic;
+		cs_n		: in std_logic;
 		data_in		: in std_logic;
 		angle_barre	: out std_logic_vector(0 to 11);
-		fin_c			: out std_logic;
+		fin_c		: out std_logic;
 		clk_in		: in std_logic
 	);
 end entity;
@@ -17,35 +17,36 @@ end entity;
 architecture rtl of shift_register is
 	signal buff_data	: std_logic_vector(0 to 11);
 	signal angle_barre_s	: std_logic_vector(0 to 11);
-	signal number		: integer range 0 to 13 := 0;
+	signal number		: integer range 0 to 16 := 0;
 begin
 	--rec_dec process
 	rec_dec	: process(clk_in) is
 	begin
-		if (clk_in'event and clk_in = '1') then
-		if (enable = '1') then
-			if (12 > number) then
-				buff_data(number) <= data_in;
-			else 
+		if (clk_in'event and clk_in = '0') then
+			if (number < 3) then
+				fin_c <= '0';
+			elsif (number > 2 and number < 15) then
+				buff_data(number - 3) <= data_in;
+				fin_c <= '0';
+			elsif (number = 15) then 
 				fin_c <= '1';
+			elsif (number = 16) then 
+				angle_barre_s <= buff_data;
+				fin_c <= '0';
+				end if;
 			end if;
-		else
-			fin_c <= '0';
-			angle_barre_s <= buff_data;
-		end if;
-		end if;
 	end process rec_dec;
 
-	COMPT_FRONT : process(clk_in) is
+	COMPT_FRONT : process(clk_in, cs_n) is
+		--el contador se reinicia con cs_n y luego queda en un numero como 15 o algo asi
 	begin
-		if (clk_in'event and clk_in = '1') then
-			if (enable = '1') then 
+		if (clk_in'event and clk_in = '0') then
+			if (number < 16) then
 				number <= number + 1;
+				end if;
+		elsif (cs_n = '0') then
+			number <= 0;
 			end if;
-			if (number = 12) then
-				number <= 0;
-			end if;
-		end if;
 	end process COMPT_FRONT;
 
 	angle_barre <= angle_barre_s;
