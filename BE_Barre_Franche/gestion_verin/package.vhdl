@@ -33,32 +33,18 @@ package tools is
 	end component;
 	component shift_register is
 		port(
-		enable		: in std_logic;
+		cs_n		: in std_logic;
 		data_in		: in std_logic;
 		angle_barre	: out std_logic_vector(0 to 11);
 		fin_c		: out std_logic;
 		clk_in		: in std_logic
 		);
 	end component;
-	component compt_front is
-		port(
-			clk_in		: in std_logic;
-			enable		: in std_logic;
-			counter		: out std_logic_vector(3 downto 0)
-		    );
-	end component;
 	component pilote_adc is
 		port(
 		clk_in	: in std_logic;
 		cs_n	: out std_logic;
-		fin_c	: in std_logic;
-		enable	: out std_logic
-		    );
-	end component;
-	component gene_start_conv is
-		port(
-			clk_in		: in std_logic;
-			cs_n		: out std_logic
+		fin_c	: in std_logic
 		    );
 	end component;
 	component gestion_adc is

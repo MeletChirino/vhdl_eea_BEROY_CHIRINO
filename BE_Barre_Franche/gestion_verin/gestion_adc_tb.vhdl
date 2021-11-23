@@ -29,23 +29,22 @@ begin
 			clk_out	=> clk_adc_s
 			);
 	reg_dec		: shift_register port map (
-			enable 		=> enable,
 			data_in		=> data_in,
 			--angle_barre 	=> data,
 			fin_c		=> fin_c,
-			clk_in		=> clk_adc_s
+			clk_in		=> clk_adc_s,
+			cs_n		=> cs_n
 			);
 	machine_etat	: pilote_adc port map(
 			clk_in		=> clk_adc_s,
 			cs_n		=> cs_n,
-			enable		=> enable,
 			fin_c		=> fin_c
 			);
 	clk <= not clk after 20 ns;
 
 	SEND_DATA	: process(clk_adc_s, enable)
 	begin
-		if (clk_adc_s'event and clk_adc_s = '0') then
+		if (clk_adc_s'event and clk_adc_s = '1') then
 		if(enable = '1') then
 			if (num = 12) then 
 				num <= 1;
