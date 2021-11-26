@@ -50,7 +50,7 @@ architecture rtl of gestion_verin is
 		duty_external_connection_export		=> duty_s,
 		sens_external_connection_export		=> sens_s,
 		frequency_external_connection_export		=> freq_s
-		--write_data_external_connection_export	=> write_data,
+		write_data_external_connection_export	=> write_data,
 		--write_n_external_connection_export	=> write_n,
 		--sens_external_connection_export		=> sens_s
 		 );
