@@ -40,7 +40,8 @@ architecture rtl of gestion_verin is
 	signal freq_s		: std_logic_vector(15 downto 0);
 	signal duty_s		: std_logic_vector(15 downto 0);
 	signal sens_s		: std_logic;
-begin
+	signal out_pwm_s		: std_logic;
+	begin
 	u0	: sopc_v3	port map(
 		angle_barre_external_connection_export => angle_barre_s,
 		butee_d_external_connection_export	=> butee_d,
@@ -75,12 +76,13 @@ begin
 		butee_d		=> butee_d,
 		angle_barre	=> angle_barre_s,
 		sens			=> sens_s,
-		out_pwm		=> out_pwm,
+		out_pwm		=> out_pwm_s,
 		out_sens		=> out_sens
 		);
 				
 	--clk_50 <= clk_50m;
 	out_sens <= sens_s;
+	out_pwm <= out_pwm_s;
 	pwm_raw	<= pwm_raw_s;
 	clk_adc <= clk_adc_s;
 	angle_barre <= angle_barre_s;

@@ -23,6 +23,7 @@ end entity;
 architecture rtl of gestion_butees is
 	signal pwm_s		: std_logic;
 begin
+
 	check			: process(angle_barre) is
 	begin
 		if(sens = '0') then
