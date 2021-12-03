@@ -8,19 +8,35 @@ use IEEE.numeric_std.all;
 
 entity sopc_v3 is
 	port (
+		address_external_connection_export     : in  std_logic_vector(2 downto 0)  := (others => '0'); --     address_external_connection.export
 		angle_barre_external_connection_export : in  std_logic_vector(11 downto 0) := (others => '0'); -- angle_barre_external_connection.export
 		butee_d_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_d_external_connection.export
 		butee_g_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_g_external_connection.export
+		chip_select_external_connection_export : in  std_logic                     := '0';             -- chip_select_external_connection.export
 		clk_clk                                : in  std_logic                     := '0';             --                             clk.clk
 		duty_external_connection_export        : out std_logic_vector(15 downto 0);                    --        duty_external_connection.export
+		enable_external_connection_export      : out std_logic;                                        --      enable_external_connection.export
+		fin_butee_external_connection_export   : out std_logic_vector(1 downto 0);                     --   fin_butee_external_connection.export
 		frequency_external_connection_export   : out std_logic_vector(15 downto 0);                    --   frequency_external_connection.export
+		raz_external_connection_export         : out std_logic;                                        --         raz_external_connection.export
 		read_data_external_connection_export   : out std_logic_vector(31 downto 0);                    --   read_data_external_connection.export
 		sens_external_connection_export        : out std_logic;                                        --        sens_external_connection.export
-		write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => '0')  --  write_data_external_connection.export
+		write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => '0'); --  write_data_external_connection.export
+		write_n_external_connection_export     : in  std_logic                     := '0'              --     write_n_external_connection.export
 	);
 end entity sopc_v3;
 
 architecture rtl of sopc_v3 is
+	component sopc_v3_address is
+		port (
+			clk      : in  std_logic                     := 'X';             -- clk
+			reset_n  : in  std_logic                     := 'X';             -- reset_n
+			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			readdata : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port  : in  std_logic_vector(2 downto 0)  := (others => 'X')  -- export
+		);
+	end component sopc_v3_address;
+
 	component sopc_v3_angle_barre is
 		port (
 			clk      : in  std_logic                     := 'X';             -- clk
@@ -44,6 +60,16 @@ architecture rtl of sopc_v3 is
 		);
 	end component sopc_v3_butee_d;
 
+	component sopc_v3_chip_select is
+		port (
+			clk      : in  std_logic                     := 'X';             -- clk
+			reset_n  : in  std_logic                     := 'X';             -- reset_n
+			address  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			readdata : out std_logic_vector(31 downto 0);                    -- readdata
+			in_port  : in  std_logic                     := 'X'              -- export
+		);
+	end component sopc_v3_chip_select;
+
 	component sopc_v3_duty is
 		port (
 			clk        : in  std_logic                     := 'X';             -- clk
@@ -56,6 +82,32 @@ architecture rtl of sopc_v3 is
 			out_port   : out std_logic_vector(15 downto 0)                     -- export
 		);
 	end component sopc_v3_duty;
+
+	component sopc_v3_enable is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			out_port   : out std_logic                                         -- export
+		);
+	end component sopc_v3_enable;
+
+	component sopc_v3_fin_butee is
+		port (
+			clk        : in  std_logic                     := 'X';             -- clk
+			reset_n    : in  std_logic                     := 'X';             -- reset_n
+			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
+			write_n    : in  std_logic                     := 'X';             -- write_n
+			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
+			chipselect : in  std_logic                     := 'X';             -- chipselect
+			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
+			out_port   : out std_logic_vector(1 downto 0)                      -- export
+		);
+	end component sopc_v3_fin_butee;
 
 	component sopc_v3_jtag_uart_0 is
 		port (
@@ -148,19 +200,6 @@ architecture rtl of sopc_v3 is
 		);
 	end component sopc_v3_read_data;
 
-	component sopc_v3_sens is
-		port (
-			clk        : in  std_logic                     := 'X';             -- clk
-			reset_n    : in  std_logic                     := 'X';             -- reset_n
-			address    : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- address
-			write_n    : in  std_logic                     := 'X';             -- write_n
-			writedata  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- writedata
-			chipselect : in  std_logic                     := 'X';             -- chipselect
-			readdata   : out std_logic_vector(31 downto 0);                    -- readdata
-			out_port   : out std_logic                                         -- export
-		);
-	end component sopc_v3_sens;
-
 	component sopc_v3_sysid_qsys_0 is
 		port (
 			clock    : in  std_logic                     := 'X'; -- clk
@@ -196,6 +235,8 @@ architecture rtl of sopc_v3 is
 			nios2_gen2_0_instruction_master_waitrequest    : out std_logic;                                        -- waitrequest
 			nios2_gen2_0_instruction_master_read           : in  std_logic                     := 'X';             -- read
 			nios2_gen2_0_instruction_master_readdata       : out std_logic_vector(31 downto 0);                    -- readdata
+			address_s1_address                             : out std_logic_vector(1 downto 0);                     -- address
+			address_s1_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			angle_barre_s1_address                         : out std_logic_vector(1 downto 0);                     -- address
 			angle_barre_s1_readdata                        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			butee_d_s1_address                             : out std_logic_vector(1 downto 0);                     -- address
@@ -208,11 +249,23 @@ architecture rtl of sopc_v3 is
 			butee_g_s1_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			butee_g_s1_writedata                           : out std_logic_vector(31 downto 0);                    -- writedata
 			butee_g_s1_chipselect                          : out std_logic;                                        -- chipselect
+			chip_select_s1_address                         : out std_logic_vector(1 downto 0);                     -- address
+			chip_select_s1_readdata                        : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			duty_s1_address                                : out std_logic_vector(1 downto 0);                     -- address
 			duty_s1_write                                  : out std_logic;                                        -- write
 			duty_s1_readdata                               : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			duty_s1_writedata                              : out std_logic_vector(31 downto 0);                    -- writedata
 			duty_s1_chipselect                             : out std_logic;                                        -- chipselect
+			enable_s1_address                              : out std_logic_vector(1 downto 0);                     -- address
+			enable_s1_write                                : out std_logic;                                        -- write
+			enable_s1_readdata                             : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			enable_s1_writedata                            : out std_logic_vector(31 downto 0);                    -- writedata
+			enable_s1_chipselect                           : out std_logic;                                        -- chipselect
+			fin_butee_s1_address                           : out std_logic_vector(1 downto 0);                     -- address
+			fin_butee_s1_write                             : out std_logic;                                        -- write
+			fin_butee_s1_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			fin_butee_s1_writedata                         : out std_logic_vector(31 downto 0);                    -- writedata
+			fin_butee_s1_chipselect                        : out std_logic;                                        -- chipselect
 			frequency_s1_address                           : out std_logic_vector(1 downto 0);                     -- address
 			frequency_s1_write                             : out std_logic;                                        -- write
 			frequency_s1_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -247,6 +300,11 @@ architecture rtl of sopc_v3 is
 			onchip_memory2_1_s1_byteenable                 : out std_logic_vector(3 downto 0);                     -- byteenable
 			onchip_memory2_1_s1_chipselect                 : out std_logic;                                        -- chipselect
 			onchip_memory2_1_s1_clken                      : out std_logic;                                        -- clken
+			raz_n_s1_address                               : out std_logic_vector(1 downto 0);                     -- address
+			raz_n_s1_write                                 : out std_logic;                                        -- write
+			raz_n_s1_readdata                              : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			raz_n_s1_writedata                             : out std_logic_vector(31 downto 0);                    -- writedata
+			raz_n_s1_chipselect                            : out std_logic;                                        -- chipselect
 			read_data_s1_address                           : out std_logic_vector(1 downto 0);                     -- address
 			read_data_s1_write                             : out std_logic;                                        -- write
 			read_data_s1_readdata                          : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
@@ -260,7 +318,9 @@ architecture rtl of sopc_v3 is
 			sysid_qsys_0_control_slave_address             : out std_logic_vector(0 downto 0);                     -- address
 			sysid_qsys_0_control_slave_readdata            : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
 			write_data_s1_address                          : out std_logic_vector(1 downto 0);                     -- address
-			write_data_s1_readdata                         : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
+			write_data_s1_readdata                         : in  std_logic_vector(31 downto 0) := (others => 'X'); -- readdata
+			write_n_s1_address                             : out std_logic_vector(1 downto 0);                     -- address
+			write_n_s1_readdata                            : in  std_logic_vector(31 downto 0) := (others => 'X')  -- readdata
 		);
 	end component sopc_v3_mm_interconnect_0;
 
@@ -417,6 +477,27 @@ architecture rtl of sopc_v3 is
 	signal mm_interconnect_0_sens_s1_address                               : std_logic_vector(1 downto 0);  -- mm_interconnect_0:sens_s1_address -> sens:address
 	signal mm_interconnect_0_sens_s1_write                                 : std_logic;                     -- mm_interconnect_0:sens_s1_write -> mm_interconnect_0_sens_s1_write:in
 	signal mm_interconnect_0_sens_s1_writedata                             : std_logic_vector(31 downto 0); -- mm_interconnect_0:sens_s1_writedata -> sens:writedata
+	signal mm_interconnect_0_chip_select_s1_readdata                       : std_logic_vector(31 downto 0); -- chip_select:readdata -> mm_interconnect_0:chip_select_s1_readdata
+	signal mm_interconnect_0_chip_select_s1_address                        : std_logic_vector(1 downto 0);  -- mm_interconnect_0:chip_select_s1_address -> chip_select:address
+	signal mm_interconnect_0_address_s1_readdata                           : std_logic_vector(31 downto 0); -- address:readdata -> mm_interconnect_0:address_s1_readdata
+	signal mm_interconnect_0_address_s1_address                            : std_logic_vector(1 downto 0);  -- mm_interconnect_0:address_s1_address -> address:address
+	signal mm_interconnect_0_write_n_s1_readdata                           : std_logic_vector(31 downto 0); -- write_n:readdata -> mm_interconnect_0:write_n_s1_readdata
+	signal mm_interconnect_0_write_n_s1_address                            : std_logic_vector(1 downto 0);  -- mm_interconnect_0:write_n_s1_address -> write_n:address
+	signal mm_interconnect_0_raz_n_s1_chipselect                           : std_logic;                     -- mm_interconnect_0:raz_n_s1_chipselect -> raz_n:chipselect
+	signal mm_interconnect_0_raz_n_s1_readdata                             : std_logic_vector(31 downto 0); -- raz_n:readdata -> mm_interconnect_0:raz_n_s1_readdata
+	signal mm_interconnect_0_raz_n_s1_address                              : std_logic_vector(1 downto 0);  -- mm_interconnect_0:raz_n_s1_address -> raz_n:address
+	signal mm_interconnect_0_raz_n_s1_write                                : std_logic;                     -- mm_interconnect_0:raz_n_s1_write -> mm_interconnect_0_raz_n_s1_write:in
+	signal mm_interconnect_0_raz_n_s1_writedata                            : std_logic_vector(31 downto 0); -- mm_interconnect_0:raz_n_s1_writedata -> raz_n:writedata
+	signal mm_interconnect_0_enable_s1_chipselect                          : std_logic;                     -- mm_interconnect_0:enable_s1_chipselect -> enable:chipselect
+	signal mm_interconnect_0_enable_s1_readdata                            : std_logic_vector(31 downto 0); -- enable:readdata -> mm_interconnect_0:enable_s1_readdata
+	signal mm_interconnect_0_enable_s1_address                             : std_logic_vector(1 downto 0);  -- mm_interconnect_0:enable_s1_address -> enable:address
+	signal mm_interconnect_0_enable_s1_write                               : std_logic;                     -- mm_interconnect_0:enable_s1_write -> mm_interconnect_0_enable_s1_write:in
+	signal mm_interconnect_0_enable_s1_writedata                           : std_logic_vector(31 downto 0); -- mm_interconnect_0:enable_s1_writedata -> enable:writedata
+	signal mm_interconnect_0_fin_butee_s1_chipselect                       : std_logic;                     -- mm_interconnect_0:fin_butee_s1_chipselect -> fin_butee:chipselect
+	signal mm_interconnect_0_fin_butee_s1_readdata                         : std_logic_vector(31 downto 0); -- fin_butee:readdata -> mm_interconnect_0:fin_butee_s1_readdata
+	signal mm_interconnect_0_fin_butee_s1_address                          : std_logic_vector(1 downto 0);  -- mm_interconnect_0:fin_butee_s1_address -> fin_butee:address
+	signal mm_interconnect_0_fin_butee_s1_write                            : std_logic;                     -- mm_interconnect_0:fin_butee_s1_write -> mm_interconnect_0_fin_butee_s1_write:in
+	signal mm_interconnect_0_fin_butee_s1_writedata                        : std_logic_vector(31 downto 0); -- mm_interconnect_0:fin_butee_s1_writedata -> fin_butee:writedata
 	signal irq_mapper_receiver0_irq                                        : std_logic;                     -- jtag_uart_0:av_irq -> irq_mapper:receiver0_irq
 	signal nios2_gen2_0_irq_irq                                            : std_logic_vector(31 downto 0); -- irq_mapper:sender_irq -> nios2_gen2_0:irq
 	signal rst_controller_reset_out_reset                                  : std_logic;                     -- rst_controller:reset_out -> [irq_mapper:reset, mm_interconnect_0:nios2_gen2_0_reset_reset_bridge_in_reset_reset, onchip_memory2_0:reset, onchip_memory2_1:reset, rst_controller_reset_out_reset:in, rst_translator:in_reset]
@@ -429,9 +510,21 @@ architecture rtl of sopc_v3 is
 	signal mm_interconnect_0_duty_s1_write_ports_inv                       : std_logic;                     -- mm_interconnect_0_duty_s1_write:inv -> duty:write_n
 	signal mm_interconnect_0_read_data_s1_write_ports_inv                  : std_logic;                     -- mm_interconnect_0_read_data_s1_write:inv -> read_data:write_n
 	signal mm_interconnect_0_sens_s1_write_ports_inv                       : std_logic;                     -- mm_interconnect_0_sens_s1_write:inv -> sens:write_n
-	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [angle_barre:reset_n, butee_d:reset_n, butee_g:reset_n, duty:reset_n, frequency:reset_n, jtag_uart_0:rst_n, nios2_gen2_0:reset_n, read_data:reset_n, sens:reset_n, sysid_qsys_0:reset_n, write_data:reset_n]
+	signal mm_interconnect_0_raz_n_s1_write_ports_inv                      : std_logic;                     -- mm_interconnect_0_raz_n_s1_write:inv -> raz_n:write_n
+	signal mm_interconnect_0_enable_s1_write_ports_inv                     : std_logic;                     -- mm_interconnect_0_enable_s1_write:inv -> enable:write_n
+	signal mm_interconnect_0_fin_butee_s1_write_ports_inv                  : std_logic;                     -- mm_interconnect_0_fin_butee_s1_write:inv -> fin_butee:write_n
+	signal rst_controller_reset_out_reset_ports_inv                        : std_logic;                     -- rst_controller_reset_out_reset:inv -> [address:reset_n, angle_barre:reset_n, butee_d:reset_n, butee_g:reset_n, chip_select:reset_n, duty:reset_n, enable:reset_n, fin_butee:reset_n, frequency:reset_n, jtag_uart_0:rst_n, nios2_gen2_0:reset_n, raz_n:reset_n, read_data:reset_n, sens:reset_n, sysid_qsys_0:reset_n, write_data:reset_n, write_n:reset_n]
 
 begin
+
+	address : component sopc_v3_address
+		port map (
+			clk      => clk_clk,                                  --                 clk.clk
+			reset_n  => rst_controller_reset_out_reset_ports_inv, --               reset.reset_n
+			address  => mm_interconnect_0_address_s1_address,     --                  s1.address
+			readdata => mm_interconnect_0_address_s1_readdata,    --                    .readdata
+			in_port  => address_external_connection_export        -- external_connection.export
+		);
 
 	angle_barre : component sopc_v3_angle_barre
 		port map (
@@ -466,6 +559,15 @@ begin
 			out_port   => butee_g_external_connection_export            -- external_connection.export
 		);
 
+	chip_select : component sopc_v3_chip_select
+		port map (
+			clk      => clk_clk,                                   --                 clk.clk
+			reset_n  => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
+			address  => mm_interconnect_0_chip_select_s1_address,  --                  s1.address
+			readdata => mm_interconnect_0_chip_select_s1_readdata, --                    .readdata
+			in_port  => chip_select_external_connection_export     -- external_connection.export
+		);
+
 	duty : component sopc_v3_duty
 		port map (
 			clk        => clk_clk,                                   --                 clk.clk
@@ -476,6 +578,30 @@ begin
 			chipselect => mm_interconnect_0_duty_s1_chipselect,      --                    .chipselect
 			readdata   => mm_interconnect_0_duty_s1_readdata,        --                    .readdata
 			out_port   => duty_external_connection_export            -- external_connection.export
+		);
+
+	enable : component sopc_v3_enable
+		port map (
+			clk        => clk_clk,                                     --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,    --               reset.reset_n
+			address    => mm_interconnect_0_enable_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_enable_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_enable_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_enable_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_enable_s1_readdata,        --                    .readdata
+			out_port   => enable_external_connection_export            -- external_connection.export
+		);
+
+	fin_butee : component sopc_v3_fin_butee
+		port map (
+			clk        => clk_clk,                                        --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,       --               reset.reset_n
+			address    => mm_interconnect_0_fin_butee_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_fin_butee_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_fin_butee_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_fin_butee_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_fin_butee_s1_readdata,        --                    .readdata
+			out_port   => fin_butee_external_connection_export            -- external_connection.export
 		);
 
 	frequency : component sopc_v3_duty
@@ -564,6 +690,18 @@ begin
 			freeze     => '0'                                               -- (terminated)
 		);
 
+	raz_n : component sopc_v3_enable
+		port map (
+			clk        => clk_clk,                                    --                 clk.clk
+			reset_n    => rst_controller_reset_out_reset_ports_inv,   --               reset.reset_n
+			address    => mm_interconnect_0_raz_n_s1_address,         --                  s1.address
+			write_n    => mm_interconnect_0_raz_n_s1_write_ports_inv, --                    .write_n
+			writedata  => mm_interconnect_0_raz_n_s1_writedata,       --                    .writedata
+			chipselect => mm_interconnect_0_raz_n_s1_chipselect,      --                    .chipselect
+			readdata   => mm_interconnect_0_raz_n_s1_readdata,        --                    .readdata
+			out_port   => raz_external_connection_export              -- external_connection.export
+		);
+
 	read_data : component sopc_v3_read_data
 		port map (
 			clk        => clk_clk,                                        --                 clk.clk
@@ -576,7 +714,7 @@ begin
 			out_port   => read_data_external_connection_export            -- external_connection.export
 		);
 
-	sens : component sopc_v3_sens
+	sens : component sopc_v3_enable
 		port map (
 			clk        => clk_clk,                                   --                 clk.clk
 			reset_n    => rst_controller_reset_out_reset_ports_inv,  --               reset.reset_n
@@ -605,6 +743,15 @@ begin
 			in_port  => write_data_external_connection_export     -- external_connection.export
 		);
 
+	write_n : component sopc_v3_chip_select
+		port map (
+			clk      => clk_clk,                                  --                 clk.clk
+			reset_n  => rst_controller_reset_out_reset_ports_inv, --               reset.reset_n
+			address  => mm_interconnect_0_write_n_s1_address,     --                  s1.address
+			readdata => mm_interconnect_0_write_n_s1_readdata,    --                    .readdata
+			in_port  => write_n_external_connection_export        -- external_connection.export
+		);
+
 	mm_interconnect_0 : component sopc_v3_mm_interconnect_0
 		port map (
 			clk_0_clk_clk                                  => clk_clk,                                                     --                                clk_0_clk.clk
@@ -621,6 +768,8 @@ begin
 			nios2_gen2_0_instruction_master_waitrequest    => nios2_gen2_0_instruction_master_waitrequest,                 --                                         .waitrequest
 			nios2_gen2_0_instruction_master_read           => nios2_gen2_0_instruction_master_read,                        --                                         .read
 			nios2_gen2_0_instruction_master_readdata       => nios2_gen2_0_instruction_master_readdata,                    --                                         .readdata
+			address_s1_address                             => mm_interconnect_0_address_s1_address,                        --                               address_s1.address
+			address_s1_readdata                            => mm_interconnect_0_address_s1_readdata,                       --                                         .readdata
 			angle_barre_s1_address                         => mm_interconnect_0_angle_barre_s1_address,                    --                           angle_barre_s1.address
 			angle_barre_s1_readdata                        => mm_interconnect_0_angle_barre_s1_readdata,                   --                                         .readdata
 			butee_d_s1_address                             => mm_interconnect_0_butee_d_s1_address,                        --                               butee_d_s1.address
@@ -633,11 +782,23 @@ begin
 			butee_g_s1_readdata                            => mm_interconnect_0_butee_g_s1_readdata,                       --                                         .readdata
 			butee_g_s1_writedata                           => mm_interconnect_0_butee_g_s1_writedata,                      --                                         .writedata
 			butee_g_s1_chipselect                          => mm_interconnect_0_butee_g_s1_chipselect,                     --                                         .chipselect
+			chip_select_s1_address                         => mm_interconnect_0_chip_select_s1_address,                    --                           chip_select_s1.address
+			chip_select_s1_readdata                        => mm_interconnect_0_chip_select_s1_readdata,                   --                                         .readdata
 			duty_s1_address                                => mm_interconnect_0_duty_s1_address,                           --                                  duty_s1.address
 			duty_s1_write                                  => mm_interconnect_0_duty_s1_write,                             --                                         .write
 			duty_s1_readdata                               => mm_interconnect_0_duty_s1_readdata,                          --                                         .readdata
 			duty_s1_writedata                              => mm_interconnect_0_duty_s1_writedata,                         --                                         .writedata
 			duty_s1_chipselect                             => mm_interconnect_0_duty_s1_chipselect,                        --                                         .chipselect
+			enable_s1_address                              => mm_interconnect_0_enable_s1_address,                         --                                enable_s1.address
+			enable_s1_write                                => mm_interconnect_0_enable_s1_write,                           --                                         .write
+			enable_s1_readdata                             => mm_interconnect_0_enable_s1_readdata,                        --                                         .readdata
+			enable_s1_writedata                            => mm_interconnect_0_enable_s1_writedata,                       --                                         .writedata
+			enable_s1_chipselect                           => mm_interconnect_0_enable_s1_chipselect,                      --                                         .chipselect
+			fin_butee_s1_address                           => mm_interconnect_0_fin_butee_s1_address,                      --                             fin_butee_s1.address
+			fin_butee_s1_write                             => mm_interconnect_0_fin_butee_s1_write,                        --                                         .write
+			fin_butee_s1_readdata                          => mm_interconnect_0_fin_butee_s1_readdata,                     --                                         .readdata
+			fin_butee_s1_writedata                         => mm_interconnect_0_fin_butee_s1_writedata,                    --                                         .writedata
+			fin_butee_s1_chipselect                        => mm_interconnect_0_fin_butee_s1_chipselect,                   --                                         .chipselect
 			frequency_s1_address                           => mm_interconnect_0_frequency_s1_address,                      --                             frequency_s1.address
 			frequency_s1_write                             => mm_interconnect_0_frequency_s1_write,                        --                                         .write
 			frequency_s1_readdata                          => mm_interconnect_0_frequency_s1_readdata,                     --                                         .readdata
@@ -672,6 +833,11 @@ begin
 			onchip_memory2_1_s1_byteenable                 => mm_interconnect_0_onchip_memory2_1_s1_byteenable,            --                                         .byteenable
 			onchip_memory2_1_s1_chipselect                 => mm_interconnect_0_onchip_memory2_1_s1_chipselect,            --                                         .chipselect
 			onchip_memory2_1_s1_clken                      => mm_interconnect_0_onchip_memory2_1_s1_clken,                 --                                         .clken
+			raz_n_s1_address                               => mm_interconnect_0_raz_n_s1_address,                          --                                 raz_n_s1.address
+			raz_n_s1_write                                 => mm_interconnect_0_raz_n_s1_write,                            --                                         .write
+			raz_n_s1_readdata                              => mm_interconnect_0_raz_n_s1_readdata,                         --                                         .readdata
+			raz_n_s1_writedata                             => mm_interconnect_0_raz_n_s1_writedata,                        --                                         .writedata
+			raz_n_s1_chipselect                            => mm_interconnect_0_raz_n_s1_chipselect,                       --                                         .chipselect
 			read_data_s1_address                           => mm_interconnect_0_read_data_s1_address,                      --                             read_data_s1.address
 			read_data_s1_write                             => mm_interconnect_0_read_data_s1_write,                        --                                         .write
 			read_data_s1_readdata                          => mm_interconnect_0_read_data_s1_readdata,                     --                                         .readdata
@@ -685,7 +851,9 @@ begin
 			sysid_qsys_0_control_slave_address             => mm_interconnect_0_sysid_qsys_0_control_slave_address,        --               sysid_qsys_0_control_slave.address
 			sysid_qsys_0_control_slave_readdata            => mm_interconnect_0_sysid_qsys_0_control_slave_readdata,       --                                         .readdata
 			write_data_s1_address                          => mm_interconnect_0_write_data_s1_address,                     --                            write_data_s1.address
-			write_data_s1_readdata                         => mm_interconnect_0_write_data_s1_readdata                     --                                         .readdata
+			write_data_s1_readdata                         => mm_interconnect_0_write_data_s1_readdata,                    --                                         .readdata
+			write_n_s1_address                             => mm_interconnect_0_write_n_s1_address,                        --                               write_n_s1.address
+			write_n_s1_readdata                            => mm_interconnect_0_write_n_s1_readdata                        --                                         .readdata
 		);
 
 	irq_mapper : component sopc_v3_irq_mapper
@@ -776,6 +944,12 @@ begin
 	mm_interconnect_0_read_data_s1_write_ports_inv <= not mm_interconnect_0_read_data_s1_write;
 
 	mm_interconnect_0_sens_s1_write_ports_inv <= not mm_interconnect_0_sens_s1_write;
+
+	mm_interconnect_0_raz_n_s1_write_ports_inv <= not mm_interconnect_0_raz_n_s1_write;
+
+	mm_interconnect_0_enable_s1_write_ports_inv <= not mm_interconnect_0_enable_s1_write;
+
+	mm_interconnect_0_fin_butee_s1_write_ports_inv <= not mm_interconnect_0_fin_butee_s1_write;
 
 	rst_controller_reset_out_reset_ports_inv <= not rst_controller_reset_out_reset;
 

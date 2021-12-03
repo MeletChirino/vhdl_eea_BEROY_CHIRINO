@@ -1,14 +1,20 @@
 	component sopc_v3 is
 		port (
+			address_external_connection_export     : in  std_logic_vector(2 downto 0)  := (others => 'X'); -- export
 			angle_barre_external_connection_export : in  std_logic_vector(11 downto 0) := (others => 'X'); -- export
 			butee_d_external_connection_export     : out std_logic_vector(11 downto 0);                    -- export
 			butee_g_external_connection_export     : out std_logic_vector(11 downto 0);                    -- export
+			chip_select_external_connection_export : in  std_logic                     := 'X';             -- export
 			clk_clk                                : in  std_logic                     := 'X';             -- clk
 			duty_external_connection_export        : out std_logic_vector(15 downto 0);                    -- export
+			enable_external_connection_export      : out std_logic;                                        -- export
+			fin_butee_external_connection_export   : out std_logic_vector(1 downto 0);                     -- export
 			frequency_external_connection_export   : out std_logic_vector(15 downto 0);                    -- export
+			raz_external_connection_export         : out std_logic;                                        -- export
 			read_data_external_connection_export   : out std_logic_vector(31 downto 0);                    -- export
 			sens_external_connection_export        : out std_logic;                                        -- export
-			write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => 'X')  -- export
+			write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => 'X'); -- export
+			write_n_external_connection_export     : in  std_logic                     := 'X'              -- export
 		);
 	end component sopc_v3;
 

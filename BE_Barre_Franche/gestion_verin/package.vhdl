@@ -6,15 +6,21 @@ use 	ieee.numeric_std.all;
 package tools is
 	component sopc_v3 is
 		port(
+		address_external_connection_export     : in  std_logic_vector(2 downto 0)  := (others => '0'); --     address_external_connection.export
 		angle_barre_external_connection_export : in  std_logic_vector(11 downto 0) := (others => '0'); -- angle_barre_external_connection.export
 		butee_d_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_d_external_connection.export
 		butee_g_external_connection_export     : out std_logic_vector(11 downto 0);                    --     butee_g_external_connection.export
+		chip_select_external_connection_export : in  std_logic                     := '0';             -- chip_select_external_connection.export
 		clk_clk                                : in  std_logic                     := '0';             --                             clk.clk
 		duty_external_connection_export        : out std_logic_vector(15 downto 0);                    --        duty_external_connection.export
+		enable_external_connection_export      : out std_logic;                                        --      enable_external_connection.export
+		fin_butee_external_connection_export   : out std_logic_vector(1 downto 0);                     --   fin_butee_external_connection.export
 		frequency_external_connection_export   : out std_logic_vector(15 downto 0);                    --   frequency_external_connection.export
+		raz_external_connection_export         : out std_logic;                                        --         raz_external_connection.export
 		read_data_external_connection_export   : out std_logic_vector(31 downto 0);                    --   read_data_external_connection.export
 		sens_external_connection_export        : out std_logic;                                        --        sens_external_connection.export
-		write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => '0')  --  write_data_external_connection.export
+		write_data_external_connection_export  : in  std_logic_vector(31 downto 0) := (others => '0'); --  write_data_external_connection.export
+		write_n_external_connection_export     : in  std_logic                     := '0'              --     write_n_external_connection.exporternal_connection.export
 			);
 	end component;
 	component pwm_module is
