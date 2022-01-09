@@ -34,7 +34,6 @@ begin
 			pwm_s <= '0';
 			wait for 10 ns;
 			end loop;
-		--comentario aleatorio
 		end process pwm_gen;
 
 	process is

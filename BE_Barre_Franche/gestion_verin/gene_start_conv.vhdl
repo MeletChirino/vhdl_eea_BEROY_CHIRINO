@@ -23,6 +23,7 @@ begin
 			number <= number + x"0001";
 		end if;
 		if (number > x"c349") then
+		--if (number > x"00f3") then
 			output <= not output;
 			number <= x"0000";
 		end if;

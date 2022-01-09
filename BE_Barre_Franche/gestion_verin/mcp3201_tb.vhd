@@ -68,9 +68,10 @@ begin
 			clk_conv <= not(clk_conv);
 			data_in <= data(j);
 			j <= j + 1;
-		end if;
-			if(j = 11) then
-				j <= 0;
+			end if;
+
+		if(j = 11) then
+			j <= 0;
 			end if;
 	end process send_data;
 

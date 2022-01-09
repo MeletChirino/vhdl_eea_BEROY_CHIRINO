@@ -13,9 +13,9 @@ entity compt_front is
 end entity;
 
 architecture rtl of compt_front is
-	signal number	: std_logic_vector(3 downto 0) := x"0";
 begin
 	compt_front_p	: process(clk_in) is
+		variable number	: integer range 0 to 15
 	begin
 		if(enable = '1') then
 			if (clk_in'event and clk_in =  '1') then
