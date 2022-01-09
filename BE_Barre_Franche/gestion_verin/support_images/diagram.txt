@@ -1,0 +1,29 @@
+@startuml
+package "Gestion_Verin" {
+	[Interface Avalon] as sopc
+	[PWM module]
+	[Gestion ADC]
+	[Gestion Butees]
+}
+interface "Trame NMEA" as nmea
+clk_50MHz -down-# [Gestion ADC]
+clk_50MHz -right-# [PWM module] 
+[Gestion ADC] #-left- ADC : clk_adc
+ADC -down-# [Gestion ADC] : serial_adc_data
+Position_Verin -down-> sopc : analog_position
+sopc -right-# [PWM module] : freq
+sopc -right-# [PWM module] : duty
+[Gestion ADC] -down-# [Gestion Butees] : angle_barre[11:0]
+[PWM module] -down-# [Gestion Butees] : pwm_singal
+[Gestion Butees] #-right- H_Bridge : pwm_power
+[Gestion Butees] #-right- H_Bridge : sens
+sopc --> [Gestion Butees] : butee_g
+sopc --> [Gestion Butees] : butee_g
+sopc --> [Gestion Butees] : sens
+nmea --> sopc : chip_select
+nmea --> sopc : write_n
+nmea --> sopc : read_n
+nmea --> sopc : write_data
+nmea --> sopc : address
+
+@enduml

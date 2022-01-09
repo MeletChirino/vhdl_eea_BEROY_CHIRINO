@@ -1,0 +1,22 @@
+@startuml
+package "Gestion ADC" {
+	[clk_1MHz] as clk
+	[State Machine] as state_machine
+	[Shift register] as shift_register
+	[Start Conversion] as cs_n
+	[Rising Edge Counter] as counter_re
+}
+[ADC Module] as adc
+clk_50MHz -right-> clk
+clk -right-> adc : clk_adc
+clk -down-> cs_n
+clk -right-> state_machine
+cs_n -down-> counter_re 
+cs_n --> adc
+shift_register --> state_machine : fin_c
+shift_register --> counter_re : fin_c
+counter_re --> shift_register : number
+state_machine --> shift_register : state
+adc --> shift_register : angle
+shift_register --> gestion_butees : angle_barre[11:0]
+@enduml

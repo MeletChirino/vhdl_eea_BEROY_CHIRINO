@@ -1,0 +1,99 @@
+@startuml
+clock clk with period 1
+binary "CS" as cs_n
+binary "data out" as data
+concise "buffer" as buffer
+concise "shift_reg" as shift
+
+@2 as :cs
+@:cs+4 as :save
+@:save+13 as :write_end
+
+
+@0
+cs_n is high
+data is high
+shift is "0x0"
+buffer is 0x0
+
+@:cs
+cs_n is low
+data is 0
+
+@:save
+data is low
+
+@:save+1
+data is high
+data -> buffer :b11
+buffer is 0x1
+
+@:save+2
+data is high
+data -> buffer :b10
+buffer is 0x3
+
+@:save+3
+data is low
+data -> buffer :b9
+buffer is 0x3
+
+@:save+4
+data is low
+data -> buffer :b8
+buffer is 0x3
+
+@:save+5
+data is low
+data -> buffer :b7
+buffer is 0x3
+
+@:save+6
+data is high
+data -> buffer :b6
+buffer is 0x23
+
+@:save+7
+data is low
+data -> buffer :b5
+buffer is 0x23
+
+@:save+8
+data is low
+data -> buffer :b4
+buffer is 0x23
+
+@:save+9
+data is high
+data -> buffer :b3
+buffer is 0x123
+
+@:save+10
+data is high
+data -> buffer :b2
+buffer is 0x323
+
+@:save+11
+data is high
+data -> buffer :b1
+buffer is 0x923
+
+@:save+12
+data is high
+data -> buffer :b0
+buffer is 0xf23
+
+@:write_end
+buffer -> shift : data
+shift is 0xf23
+
+@:save+14
+buffer is 0x0
+
+highlight :cs to :save #Gold;line:DimGrey : Converting Analog Data
+
+highlight :save to :save+12 #lightBlue;line:DimGrey : Saving data
+
+@:cs <-> @:cs+4 : {4ms}
+@:save <-> @:save+12 : {4ms}
+@enduml
