@@ -4,6 +4,19 @@ use 	ieee.std_logic_unsigned.all;
 use 	ieee.numeric_std.all;
 
 package tools is
+	component projet_anemometre is
+		port(
+			raz_n  : in std_logic;
+			continu  : in std_logic;
+			start_stop  : in std_logic;
+			clk_50M	: in std_logic;
+			in_freq_anemometre : in std_logic;
+			data_valid : out std_logic;
+			LED_TEST : out std_logic;
+			data_anemometre	: out std_logic_vector(7 downto 0)
+			);
+	end component;
+
 
 	component counter is
 		port(

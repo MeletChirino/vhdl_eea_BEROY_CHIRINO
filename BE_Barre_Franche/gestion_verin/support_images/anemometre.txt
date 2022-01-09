@@ -1,0 +1,26 @@
+@startuml
+interface "Clk 50MHz" as clk50
+interface "Anemometre" as anemo
+interface raz_n
+interface start_stop
+interface data_valid
+interface data_anemometre
+interface continu
+package "Anemometre" {
+	[Time Divider] as time_divider
+	[Counter] as counter
+	[Select Mode] as select_mode
+interface "Clk 1MHz" as clk1
+}
+clk50 -right-> time_divider
+time_divider -right->  clk1
+clk1 -right-> counter
+clk1 -down-> select_mode
+counter -down->"freq" select_mode
+anemo -left->"IN_FREQ" counter
+raz_n -down-# counter
+continu -left-> select_mode
+start_stop -up-> select_mode
+select_mode #-down-> data_valid
+select_mode #-down-> data_anemometre
+@enduml
