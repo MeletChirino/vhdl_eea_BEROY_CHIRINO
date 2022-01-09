@@ -11,18 +11,21 @@ All VHDL circuits written in this repo has been simulated using [GHDL](http://gh
 # Project BE
 We have choosen as primary functions the anemometer and Gestion Verin
 ## Anemometre
-![anemometer-diagram](https://i.ibb.co/ScbYyr1/diagram.png)
+![anemometer-diagram](https://carpego-files-bucket.s3.amazonaws.com/img/anemometre.png)
 ## Gestion Verin
 This device is going to manage position of a piston so it has several internal pieces. This is internal diagram of functions
 
-![gv-diagram](https://i.ibb.co/CKkqYKD/diagram.png)
+![gv-diagram](https://carpego-files-bucket.s3.amazonaws.com/img/diagram.png)
 ### Frequency Clock Divider
 This module is going to divide frequency by 50 and is going to give us a frequency of 1MHz used with the other devices
 ### PWM Module
 This PWM module is going to receive the frequency and duty cycle coded by software with internal microcontroler
 
-![pwm-diagram](https://i.ibb.co/Rzpsm4T/pwm-module.png)
+![pwm-diagram](https://carpego-files-bucket.s3.amazonaws.com/img/pwm_module.png)
 ### ADC Diagram
 This device is going to receive data from MCP3201 as serial input and store it as numeric 12-bit number
 
-![adc-diagram](https://i.ibb.co/9nJ81WJ/adc-module.png)
+![adc-diagram](https://carpego-files-bucket.s3.amazonaws.com/img/adc_module.png)
+
+### Interface Avalon
+![adc-diagram](https://carpego-files-bucket.s3.amazonaws.com/img/trame_nmea.png)
