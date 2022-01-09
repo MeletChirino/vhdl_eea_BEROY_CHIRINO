@@ -1,83 +1,3 @@
-/* 
- * "Small Hello World" example. 
- * 
- * This example prints 'Hello from Nios II' to the STDOUT stream. It runs on
- * the Nios II 'standard', 'full_featured', 'fast', and 'low_cost' example 
- * designs. It requires a STDOUT  device in your system's hardware. 
- *
- * The purpose of this example is to demonstrate the smallest possible Hello 
- * World application, using the Nios II HAL library.  The memory footprint
- * of this hosted application is ~332 bytes by default using the standard 
- * reference design.  For a more fully featured Hello World application
- * example, see the example titled "Hello World".
- *
- * The memory footprint of this example has been reduced by making the
- * following changes to the normal "Hello World" example.
- * Check in the Nios II Software Developers Manual for a more complete 
- * description.
- * 
- * In the SW Application project (small_hello_world):
- *
- *  - In the C/C++ Build page
- * 
- *    - Set the Optimization Level to -Os
- * 
- * In System Library project (small_hello_world_syslib):
- *  - In the C/C++ Build page
- * 
- *    - Set the Optimization Level to -Os
- * 
- *    - Define the preprocessor option ALT_NO_INSTRUCTION_EMULATION 
- *      This removes software exception handling, which means that you cannot 
- *      run code compiled for Nios II cpu with a hardware multiplier on a core 
- *      without a the multiply unit. Check the Nios II Software Developers 
- *      Manual for more details.
- *
- *  - In the System Library page:
- *    - Set Periodic system timer and Timestamp timer to none
- *      This prevents the automatic inclusion of the timer driver.
- *
- *    - Set Max file descriptors to 4
- *      This reduces the size of the file handle pool.
- *
- *    - Check Main function does not exit
- *    - Uncheck Clean exit (flush buffers)
- *      This removes the unneeded call to exit when main returns, since it
- *      won't.
- *
- *    - Check Don't use C++
- *      This builds without the C++ support code.
- *
- *    - Check Small C library
- *      This uses a reduced functionality C library, which lacks  
- *      support for buffering, file IO, floating point and getch(), etc. 
- *      Check the Nios II Software Developers Manual for a complete list.
- *
- *    - Check Reduced device drivers
- *      This uses reduced functionality drivers if they're available. For the
- *      standard design this means you get polled UART and JTAG UART drivers,
- *      no support for the LCD driver and you lose the ability to program 
- *      CFI compliant flash devices.
- *
- *    - Check Access device drivers directly
- *      This bypasses the device file system to access device drivers directly.
- *      This eliminates the space required for the device file system services.
- *      It also provides a HAL version of libc services that access the drivers
- *      directly, further reducing space. Only a limited number of libc
- *      functions are available in this configuration.
- *
- *    - Use ALT versions of stdio routines:
- *
- *           Function                  Description
- *        ===============  =====================================
- *        alt_printf       Only supports %s, %x, and %c ( < 1 Kbyte)
- *        alt_putstr       Smaller overhead than puts with direct drivers
- *                         Note this function doesn't add a newline.
- *        alt_putchar      Smaller overhead than putchar with direct drivers
- *        alt_getchar      Smaller overhead than getchar with direct drivers
- *
- */
-
 #include "sys/alt_stdio.h"
 #include "system.h"
 //#define angle_barre (int *) 0x21090
@@ -112,18 +32,58 @@ void set_sens(int sens){
 }
 int main()
 {
-	int angle;
+	int angle, config, address, buffer;
+	bool write_n;
 	alt_putstr("Hello from Nios II!\n");
-	set_duty(0x4f40);
-	set_freq(0xf0ff);
+	//PWM disabled at first
+	set_duty(0x0);
+	set_freq(0x0);
+	//inital data provided until data received from NIOS
 	set_butee_g(1350);
 	set_butee_d(2570);
-	alt_putstr("sens0!\n");
 	set_sens(1);
 	while(1){
-			//0x21090
 			angle = IORD_ALTERA_AVALON_PIO_DATA(ANGLE_BARRE_BASE);
-			alt_putstr("Echantillone!\n");
+			write_n = IORD_ALTERA_AVALON_PIO_DATA(WRITE_N_BASE);
+			if(write_n){
+				address = IORD_ALTERA_AVALON_PIO_DATA(ADDRESS_BASE);
+				switch(address){
+					case 0x0://frequency
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0xffff;
+					set_freq(buffer);
+					break;
+
+					case 0x4://duty cycle
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0xffff;
+					set_duty(buffer);
+					break;
+
+					case 0x8://butee_g
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0xffff;
+					set_butee_g(buffer);
+					break;
+
+					case 0x12://butee_d
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0xffff;
+					set_butee_d(buffer);
+					break;
+
+					case 0x16://config
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0x1f;
+					IOWR_ALTERA_AVALON_PIO_DATA(RESET_BASE, buffer & 0x1);//raz_n
+					IOWR_ALTERA_AVALON_PIO_DATA(ENABLE_PWM_BASE, (buffer & 0x2) >> 1);//enable_pwm
+					IOWR_ALTERA_AVALON_PIO_DATA(SENS_BASE, (buffer & 0x4) >> 2);//sens_rotation
+					IOWR_ALTERA_AVALON_PIO_DATA(READDATA_BASE, (buffer & 0x8) >> 3);//fin_course_d
+					IOWR_ALTERA_AVALON_PIO_DATA(READDATA_BASE, (buffer & 0x16) >> 4);//fin_course_g
+					break;
+
+					case 0x20://angle_barre
+					buffer = IORD_ALTERA_AVALON_PIO_DATA(WRITEDATA_BASE) & 0xffff;
+					IOWR_ALTERA_AVALON_PIO_DATA(READDATA_BASE, angle);
+					break;
+				}
+		} 
+		buffer = 0x0;
 	};
 
   return 0;
