@@ -1,0 +1,54 @@
+@startuml
+start
+:set_duty(0x0)
+set_freq(0x0)
+set_butee_g(1350)
+set_butee_d(2570)
+set_sens(1);
+
+repeat
+:angle = RD_PIO(ANGLE_BARRE_BASE)
+write_n = RD_PIO(WRITE_N_BASE);
+
+note left
+ Les fonctions de lecture et ecriture sont
+IORD_ALTERA_AVALON_PIO_DATA
+IOWR_ALTERA_AVALON_PIO_DATA
+mais je les ai reemplace par
+RD_PIO
+WR_PIO
+pour avoir de la place;
+end note
+
+if (write_n == 1)
+:address = RD_PIO(ADDRESS_BASE);
+switch (address)
+case (0x0)
+:buffer = RD_PIO(WRITEDATA_BASE) & 0xffff
+set_freq(buffer);
+case (0x4) 
+  :buffer = RD_PIO(WRITEDATA_BASE) & 0xffff
+set_duty(buffer);
+case (0x8)
+  :buffer = RD_PIO(WRITEDATA_BASE) & 0xffff
+set_butee_g(buffer);
+case (0x12)
+  :buffer = RD_PIO(WRITEDATA_BASE) & 0xffff
+set_butee_d(buffer);
+case (0x16)
+  :buffer = RD_PIO(WRITEDATA_BASE) & 0x1f;
+:WR_PIO(RESET_BASE, buffer & 0x1)
+WR_PIO(ENABLE_PWM_BASE, (buffer & 0x2) >> 1)
+WR_PIO(SENS_BASE, (buffer & 0x4) >> 2)
+WR_PIO(READDATA_BASE, (buffer & 0x8) >> 3)
+WR_PIO(READDATA_BASE, (buffer & 0x16) >> 4);
+
+case (0x20)
+:buffer = RD_PIO(WRITEDATA_BASE) & 0xffff
+WR_PIO(READDATA_BASE, angle);
+
+endswitch
+endif
+repeat while (1)
+stop
+@enduml

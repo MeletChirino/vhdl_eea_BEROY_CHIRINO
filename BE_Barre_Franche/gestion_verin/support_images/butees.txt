@@ -1,0 +1,23 @@
+@startuml
+start
+
+if (sens = 0) then (gauche)
+if (angle < butte_g) then (yes)
+:pwm = 0
+fin_g = 1;
+else (no)
+:pwm = pwm
+fin_g = 0;
+endif
+else (droite)
+if (angle < butte_d) then (yes)
+:pwm = 0
+fin_d = 1;
+else (no)
+:pwm = pwm
+fin_d = 0;
+endif
+endif
+
+stop
+@enduml
